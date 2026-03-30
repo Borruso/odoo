@@ -119,14 +119,16 @@ class PosSessionInherit(models.Model):
             )
             if existing_transaction:
                 update_vals = {
-                    "payment_method_id": int(payment_method) if payment_method else False,
                     "employee_id": id_cashier,
                     "machine_state": message,
                     "operation": operation,
-                    "amount": float(amount) if amount else 0.00,
                     "attempt_count": existing_transaction.attempt_count + 1,
                     "processed_at": fields.Datetime.now(),
                 }
+                if payment_method:
+                    update_vals["payment_method_id"] = int(payment_method)
+                if amount not in (False, None):
+                    update_vals["amount"] = float(amount)
                 if operation in ["payment_request", "refund_payment_request"]:
                     update_vals.update({"state": "done", "last_error": False})
                 elif operation == "aborted_payment_request":

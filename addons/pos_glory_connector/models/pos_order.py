@@ -35,7 +35,7 @@ class PosOrderInherit(models.Model):
                 or {}
             )
             statement_lines = order_payload.get("statement_ids", [])
-            tx_by_payment_uuid = {}
+            payment_uuids = []
             for statement_line in statement_lines:
                 if (
                     isinstance(statement_line, (list, tuple))
@@ -44,25 +44,39 @@ class PosOrderInherit(models.Model):
                 ):
                     payment_uuid = statement_line[2].get("glory_payment_uuid")
                     if payment_uuid:
-                        tx_by_payment_uuid[payment_uuid] = self.env[
-                            "glory.transaction"
-                        ].search(
-                            [("pos_payment_uuid", "=", payment_uuid)],
-                            limit=1,
-                        )
+                        payment_uuids.append(payment_uuid)
+
+            if payment_uuids:
+                tx_to_link = self.env["glory.transaction"].search(
+                    [
+                        ("pos_payment_uuid", "in", payment_uuids),
+                        ("order_id", "=", False),
+                    ]
+                )
+                tx_to_link.write({"order_id": pos_order.id})
+
             for p in pos_order.payment_ids:
                 payment_uuid = p.uuid
                 if (
                     p.payment_method_id.is_glory_machine
                     and payment_uuid
-                    and tx_by_payment_uuid
+                    and payment_uuids
                 ):
-                    tx = tx_by_payment_uuid.get(payment_uuid)
-                    if not tx:
+                    if payment_uuid not in payment_uuids:
                         tx = self.env["glory.transaction"].search(
                             [("pos_payment_uuid", "=", payment_uuid)],
                             limit=1,
                         )
+                        if tx and not tx.order_id:
+                            tx.write({"order_id": pos_order.id})
+                            continue
+                    else:
+                        continue
+                if p.payment_method_id.is_glory_machine and payment_uuid:
+                    tx = self.env["glory.transaction"].search(
+                        [("pos_payment_uuid", "=", payment_uuid)],
+                        limit=1,
+                    )
                     if tx and not tx.order_id:
                         tx.write({"order_id": pos_order.id})
                         continue
