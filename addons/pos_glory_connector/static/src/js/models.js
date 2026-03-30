@@ -6,6 +6,8 @@ odoo.define("pos_glory_connector.GloryModels", function (require) {
         Payment: OriginalPayment,
     } = require("point_of_sale.models");
     const Registries = require("point_of_sale.Registries");
+    const generateLocalUuid = () =>
+        `glory-${Date.now()}-${Math.random().toString(16).slice(2)}`;
 
     const GloryPaymentExtension = (PaymentClass) =>
         class GloryPayment extends PaymentClass {
@@ -18,7 +20,7 @@ odoo.define("pos_glory_connector.GloryModels", function (require) {
             export_as_JSON() {
                 const json = super.export_as_JSON(...arguments);
                 json.glory_payment_uuid =
-                    this.glory_payment_uuid || this.uuid || false;
+                    this.glory_payment_uuid || this.uuid || this.cid || false;
                 return json;
             }
         };
@@ -43,7 +45,8 @@ odoo.define("pos_glory_connector.GloryModels", function (require) {
                 newPaymentline.set_amount(this.get_due());
 
                 if (payment_method.is_glory_machine) {
-                    newPaymentline.glory_payment_uuid = newPaymentline.uuid;
+                    newPaymentline.glory_payment_uuid =
+                        newPaymentline.uuid || generateLocalUuid();
                     newPaymentline.set_payment_status("pending");
                 }
 
