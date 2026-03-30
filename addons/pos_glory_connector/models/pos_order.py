@@ -46,35 +46,36 @@ class PosOrderInherit(models.Model):
                     if payment_uuid:
                         payment_uuids.append(payment_uuid)
 
+            tx_by_uuid = {}
             if payment_uuids:
-                tx_to_link = self.env["glory.transaction"].search(
+                tx_records = self.env["glory.transaction"].search(
                     [
                         ("pos_payment_uuid", "in", payment_uuids),
-                        ("order_id", "=", False),
+                        ("session_id", "=", pos_order.session_id.id),
                     ]
                 )
-                tx_to_link.write({"order_id": pos_order.id})
+                tx_by_uuid = {tx.pos_payment_uuid: tx for tx in tx_records}
+                tx_to_link = tx_records.filtered(
+                    lambda tx: not tx.order_id and tx.pos_payment_uuid
+                )
+                if tx_to_link:
+                    tx_to_link.write({"order_id": pos_order.id})
 
             for p in pos_order.payment_ids:
                 payment_uuid = p.uuid
-                if (
-                    p.payment_method_id.is_glory_machine
-                    and payment_uuid
-                    and payment_uuids
-                ):
-                    if payment_uuid not in payment_uuids:
-                        tx = self.env["glory.transaction"].search(
-                            [("pos_payment_uuid", "=", payment_uuid)],
-                            limit=1,
-                        )
-                        if tx and not tx.order_id:
-                            tx.write({"order_id": pos_order.id})
-                            continue
-                    else:
-                        continue
                 if p.payment_method_id.is_glory_machine and payment_uuid:
+                    tx = tx_by_uuid.get(payment_uuid)
+                    if tx and not tx.order_id:
+                        tx.write({"order_id": pos_order.id})
+                        continue
+                    if tx and tx.order_id:
+                        continue
                     tx = self.env["glory.transaction"].search(
-                        [("pos_payment_uuid", "=", payment_uuid)],
+                        [
+                            ("pos_payment_uuid", "=", payment_uuid),
+                            ("session_id", "=", pos_order.session_id.id),
+                            ("order_id", "=", False),
+                        ],
                         limit=1,
                     )
                     if tx and not tx.order_id:
