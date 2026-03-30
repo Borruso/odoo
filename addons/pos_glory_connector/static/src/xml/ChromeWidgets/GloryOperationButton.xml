@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="GloryOperationButton" owl="1">
+        <div class="glory-button" t-on-click="onClick">
+            <img
+                src="/pos_glory_connector/static/src/img/glory.svg"
+                alt="Glory"
+                title="Glory Operation"
+            />
+        </div>
+    </t>
+
+</templates>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="hr_employee_form_view_inherit" model="ir.ui.view">
+        <field name="name">hr.employee.form.view.inherit</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//sheet/notebook" position="inside">
+                <page name="glory_connector" string="Glory Connector">
+                    <group>
+                        <group string="Cash Move">
+                            <field name="allow_cashin_operation" />
+                            <field name="allow_cashout_operation" />
+                            <field name="allow_see_cash_move_in_reason" />
+                            <field name="allow_see_cash_move_out_reason" />
+                            <field name="allow_exchange_operation" />
+                        </group>
+                        <group string="Glory Operation">
+                            <field name="allow_status_operation" />
+                            <field name="allow_inventory_operation" />
+                            <field name="allow_administrator_operation" />
+                            <field name="allow_reset_operation" />
+                            <field name="allow_shutdown_operation" />
+                            <field name="allow_reboot_operation" />
+                            <field name="allow_see_inventory_total" />
+                            <field name="allow_see_close_total" />
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

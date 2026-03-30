@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates id="template" xml:space="preserve">
+
+    <t
+        t-name="GloryCashOpeningPopup"
+        t-inherit="point_of_sale.CashOpeningPopup"
+        t-inherit-mode="extension"
+        owl="1"
+    >
+        <xpath
+            expr="//div[hasclass('cash-input-sub-section')]/input[hasclass('pos-input')]"
+            position="attributes"
+        >
+            <attribute name="t-if">state.displayCashInput</attribute>
+        </xpath>
+        <xpath
+            expr="//div[hasclass('cash-input-sub-section')]//i[hasclass('fa-calculator')]/.."
+            position="attributes"
+        >
+            <attribute name="t-if">state.displayCashInput</attribute>
+        </xpath>
+        <xpath expr="//textarea[hasclass('opening-cash-notes')]" position="attributes">
+            <attribute name="t-if">state.displayCashInput</attribute>
+        </xpath>
+        <xpath expr="//div[hasclass('dynamic-size')]/span" position="attributes">
+            <attribute name="t-if">state.displayCashInput</attribute>
+        </xpath>
+    </t>
+
+</templates>

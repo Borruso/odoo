@@ -1,0 +1,486 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="pos_config_settings_form_view_inherit" model="ir.ui.view">
+        <field name="name">res.config.settings.form.view.inherit</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="point_of_sale.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <h2 name="pos_interface" position="before">
+                <h2 name="fiscal_epos_print">Glory Machine</h2>
+                <div class="row mt16 o_settings_container" id="glory_machine_section">
+                    <div class="col-12 col-lg-6 o_setting_box" id="glory_machine_ip">
+                        <div class="o_setting_left_pane">
+                            <field
+                                name="enable_glory"
+                                attrs="{'readonly': [('pos_has_active_session', '=', True)]}"
+                            />
+                        </div>
+                        <div
+                            class="o_setting_right_pane"
+                            attrs="{'invisible': [('enable_glory', '=', True)]}"
+                        >
+                            <span class="o_form_label">Enable Glory Machine</span>
+                            <div class="text-muted">
+                                Accept payments with Glory Machine
+                            </div>
+                        </div>
+                        <div
+                            class="o_setting_right_pane"
+                            attrs="{'invisible': [('enable_glory', '=', False)]}"
+                        >
+                            <span class="o_form_label">Glory Machine IP</span>
+                            <div class="text-muted mb-3">
+                                Setup Glory Machine IP for this PoS Config
+                            </div>
+                            <div class="content-group mt16">
+                                <field
+                                    name="glory_ip"
+                                    attrs="{'readonly': [('pos_has_active_session', '=', True)], 'required': [('enable_glory', '=', True)]}"
+                                />
+                            </div>
+                            <span class="o_form_label">Glory Machine Kind</span>
+                            <div class="text-muted mb-3">
+                                Setup Glory Machine Kind for this PoS Config
+                            </div>
+                            <div class="content-group mt16">
+                                <field
+                                    name="glory_kind"
+                                    attrs="{'readonly': [('pos_has_active_session', '=', True)], 'required': [('enable_glory', '=', True)]}"
+                                />
+                            </div>
+                            <span class="o_form_label">Glory State Cassette</span>
+                            <div class="text-muted mb-3">
+                                Setup Emails to Send Glory State Cassette for this PoS Config
+                            </div>
+                            <div class="content-group mt16">
+                                <field
+                                    name="state_cassette_email"
+                                    attrs="{'readonly': [('pos_has_active_session', '=', True)]}"
+                                />
+                            </div>
+                            <span class="o_form_label">Glory Low Stacker</span>
+                            <div class="text-muted mb-3">
+                                Setup Emails to Send Glory Low Stacker for this PoS Config
+                            </div>
+                            <div class="content-group mt16">
+                                <field
+                                    name="state_stacker_low_email"
+                                    attrs="{'readonly': [('pos_has_active_session', '=', True)]}"
+                                />
+                            </div>
+                            <span class="o_form_label">Total Money Cassette</span>
+                            <div class="text-muted mb-3">
+                                Setup Total Money Cassette for this PoS Config
+                            </div>
+                            <div class="content-group mt16">
+                                <field
+                                    name="total_money_cassette"
+                                    attrs="{'readonly': [('pos_has_active_session', '=', True)], 'required': [('enable_glory', '=', True)]}"
+                                />
+                            </div>
+                            <span class="o_form_label">Understock</span>
+                            <div class="text-muted mb-3">
+                                Setup Glory Machine Understock for this PoS Config
+                            </div>
+                            <div class="row col-12">
+                                <div class="col-6">
+                                    <div class="content-group">
+                                        <label
+                                            class="mx-2"
+                                            for="understock_bill_500_00"
+                                            string="Bill 500.00"
+                                        />
+                                        <field
+                                            name="understock_bill_500_00"
+                                            attrs="{'readonly': [('pos_has_active_session', '=', True)]}"
+                                        />
+                                    </div>
+                                    <div class="content-group">
+                                        <label
+                                            class="mx-2"
+                                            for="understock_bill_200_00"
+                                            string="Bill 200.00"
+                                        />
+                                        <field
+                                            name="understock_bill_200_00"
+                                            attrs="{'readonly': [('pos_has_active_session', '=', True)]}"
+                                        />
+                                    </div>
+                                    <div class="content-group">
+                                        <label
+                                            class="mx-2"
+                                            for="understock_bill_100_00"
+                                            string="Bill 100.00"
+                                        />
+                                        <field
+                                            name="understock_bill_100_00"
+                                            attrs="{'readonly': [('pos_has_active_session', '=', True)]}"
+                                        />
+                                    </div>
+                                    <div class="content-group">
+                                        <label
+                                            class="mx-2"
+                                            for="understock_bill_50_00"
+                                            string="Bill 50.00"
+                                        />
+                                        <field
+                                            name="understock_bill_50_00"
+                                            attrs="{'readonly': [('pos_has_active_session', '=', True)]}"
+                                        />
+                                    </div>
+                                    <div class="content-group">
+                                        <label
+                                            class="mx-2"
+                                            for="understock_bill_20_00"
+                                            string="Bill 20.00"
+                                        />
+                                        <field
+                                            name="understock_bill_20_00"
+                                            attrs="{'readonly': [('pos_has_active_session', '=', True)]}"
+                                        />
+                                    </div>
+                                    <div class="content-group">
+                                        <label
+                                            class="mx-2"
+                                            for="understock_bill_10_00"
+                                            string="Bill 10.00"
+                                        />
+                                        <field
+                                            name="understock_bill_10_00"
+                                            attrs="{'readonly': [('pos_has_active_session', '=', True)]}"
+                                        />
+                                    </div>
+                                    <div class="content-group">
+                                        <label
+                                            class="mx-2"
+                                            for="understock_bill_5_00"
+                                            string="Bill 5.00"
+                                        />
+                                        <field
+                                            name="understock_bill_5_00"
+                                            attrs="{'readonly': [('pos_has_active_session', '=', True)]}"
+                                        />
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="content-group">
+                                        <label
+                                            class="mx-2"
+                                            for="understock_coin_2_00"
+                                            string="Coin 2.00"
+                                        />
+                                        <field
+                                            name="understock_coin_2_00"
+                                            attrs="{'readonly': [('pos_has_active_session', '=', True)]}"
+                                        />
+                                    </div>
+                                    <div class="content-group">
+                                        <label
+                                            class="mx-2"
+                                            for="understock_coin_1_00"
+                                            string="Coin 1.00"
+                                        />
+                                        <field
+                                            name="understock_coin_1_00"
+                                            attrs="{'readonly': [('pos_has_active_session', '=', True)]}"
+                                        />
+                                    </div>
+                                    <div class="content-group">
+                                        <label
+                                            class="mx-2"
+                                            for="understock_coin_0_50"
+                                            string="Coin 0.50"
+                                        />
+                                        <field
+                                            name="understock_coin_0_50"
+                                            attrs="{'readonly': [('pos_has_active_session', '=', True)]}"
+                                        />
+                                    </div>
+                                    <div class="content-group">
+                                        <label
+                                            class="mx-2"
+                                            for="understock_coin_0_25"
+                                            string="Coin 0.25"
+                                        />
+                                        <field
+                                            name="understock_coin_0_25"
+                                            attrs="{'readonly': [('pos_has_active_session', '=', True)]}"
+                                        />
+                                    </div>
+                                    <div class="content-group">
+                                        <label
+                                            class="mx-2"
+                                            for="understock_coin_0_20"
+                                            string="Coin 0.20"
+                                        />
+                                        <field
+                                            name="understock_coin_0_20"
+                                            attrs="{'readonly': [('pos_has_active_session', '=', True)]}"
+                                        />
+                                    </div>
+                                    <div class="content-group">
+                                        <label
+                                            class="mx-2"
+                                            for="understock_coin_0_10"
+                                            string="Coin 0.10"
+                                        />
+                                        <field
+                                            name="understock_coin_0_10"
+                                            attrs="{'readonly': [('pos_has_active_session', '=', True)]}"
+                                        />
+                                    </div>
+                                    <div class="content-group">
+                                        <label
+                                            class="mx-2"
+                                            for="understock_coin_0_05"
+                                            string="Coin 0.05"
+                                        />
+                                        <field
+                                            name="understock_coin_0_05"
+                                            attrs="{'readonly': [('pos_has_active_session', '=', True)]}"
+                                        />
+                                    </div>
+                                    <div class="content-group">
+                                        <label
+                                            class="mx-2"
+                                            for="understock_coin_0_02"
+                                            string="Coin 0.02"
+                                        />
+                                        <field
+                                            name="understock_coin_0_02"
+                                            attrs="{'readonly': [('pos_has_active_session', '=', True)]}"
+                                        />
+                                    </div>
+                                    <div class="content-group">
+                                        <label
+                                            class="mx-2"
+                                            for="understock_coin_0_01"
+                                            string="Coin 0.01"
+                                        />
+                                        <field
+                                            name="understock_coin_0_01"
+                                            attrs="{'readonly': [('pos_has_active_session', '=', True)]}"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="col-12 col-lg-6 o_setting_box"
+                        id="glory_machine_watermarker"
+                        attrs="{'invisible': [('enable_glory', '=', False)]}"
+                    >
+                        <div class="o_setting_left_pane">
+                            <field
+                                name="use_odoo_watermarker"
+                                attrs="{'readonly': [('pos_has_active_session', '=', True)]}"
+                            />
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <span class="o_form_label">Watermarker</span>
+                            <div class="text-muted mb-3">
+                                Setup Glory Machine Watermarker for this PoS Config
+                            </div>
+                            <div
+                                class="row col-12"
+                                attrs="{'invisible': [('use_odoo_watermarker', '=', False)]}"
+                            >
+                                <div class="col-6">
+                                    <div class="content-group">
+                                        <label
+                                            class="mx-2"
+                                            for="watermarker_bill_500_00"
+                                            string="Bill 500.00"
+                                        />
+                                        <field
+                                            name="watermarker_bill_500_00"
+                                            attrs="{'readonly': [('pos_has_active_session', '=', True)]}"
+                                        />
+                                    </div>
+                                    <div class="content-group">
+                                        <label
+                                            class="mx-2"
+                                            for="watermarker_bill_200_00"
+                                            string="Bill 200.00"
+                                        />
+                                        <field
+                                            name="watermarker_bill_200_00"
+                                            attrs="{'readonly': [('pos_has_active_session', '=', True)]}"
+                                        />
+                                    </div>
+                                    <div class="content-group">
+                                        <label
+                                            class="mx-2"
+                                            for="watermarker_bill_100_00"
+                                            string="Bill 100.00"
+                                        />
+                                        <field
+                                            name="watermarker_bill_100_00"
+                                            attrs="{'readonly': [('pos_has_active_session', '=', True)]}"
+                                        />
+                                    </div>
+                                    <div class="content-group">
+                                        <label
+                                            class="mx-2"
+                                            for="watermarker_bill_50_00"
+                                            string="Bill 50.00"
+                                        />
+                                        <field
+                                            name="watermarker_bill_50_00"
+                                            attrs="{'readonly': [('pos_has_active_session', '=', True)]}"
+                                        />
+                                    </div>
+                                    <div class="content-group">
+                                        <label
+                                            class="mx-2"
+                                            for="watermarker_bill_20_00"
+                                            string="Bill 20.00"
+                                        />
+                                        <field
+                                            name="watermarker_bill_20_00"
+                                            attrs="{'readonly': [('pos_has_active_session', '=', True)]}"
+                                        />
+                                    </div>
+                                    <div class="content-group">
+                                        <label
+                                            class="mx-2"
+                                            for="watermarker_bill_10_00"
+                                            string="Bill 10.00"
+                                        />
+                                        <field
+                                            name="watermarker_bill_10_00"
+                                            attrs="{'readonly': [('pos_has_active_session', '=', True)]}"
+                                        />
+                                    </div>
+                                    <div class="content-group">
+                                        <label
+                                            class="mx-2"
+                                            for="watermarker_bill_5_00"
+                                            string="Bill 5.00"
+                                        />
+                                        <field
+                                            name="watermarker_bill_5_00"
+                                            attrs="{'readonly': [('pos_has_active_session', '=', True)]}"
+                                        />
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="content-group">
+                                        <label
+                                            class="mx-2"
+                                            for="watermarker_coin_2_00"
+                                            string="Coin 2.00"
+                                        />
+                                        <field
+                                            name="watermarker_coin_2_00"
+                                            attrs="{'readonly': [('pos_has_active_session', '=', True)]}"
+                                        />
+                                    </div>
+                                    <div class="content-group">
+                                        <label
+                                            class="mx-2"
+                                            for="watermarker_coin_1_00"
+                                            string="Coin 1.00"
+                                        />
+                                        <field
+                                            name="watermarker_coin_1_00"
+                                            attrs="{'readonly': [('pos_has_active_session', '=', True)]}"
+                                        />
+                                    </div>
+                                    <div class="content-group">
+                                        <label
+                                            class="mx-2"
+                                            for="watermarker_coin_0_50"
+                                            string="Coin 0.50"
+                                        />
+                                        <field
+                                            name="watermarker_coin_0_50"
+                                            attrs="{'readonly': [('pos_has_active_session', '=', True)]}"
+                                        />
+                                    </div>
+                                    <div class="content-group">
+                                        <label
+                                            class="mx-2"
+                                            for="watermarker_coin_0_25"
+                                            string="Coin 0.25"
+                                        />
+                                        <field
+                                            name="watermarker_coin_0_25"
+                                            attrs="{'readonly': [('pos_has_active_session', '=', True)]}"
+                                        />
+                                    </div>
+                                    <div class="content-group">
+                                        <label
+                                            class="mx-2"
+                                            for="watermarker_coin_0_20"
+                                            string="Coin 0.20"
+                                        />
+                                        <field
+                                            name="watermarker_coin_0_20"
+                                            attrs="{'readonly': [('pos_has_active_session', '=', True)]}"
+                                        />
+                                    </div>
+                                    <div class="content-group">
+                                        <label
+                                            class="mx-2"
+                                            for="watermarker_coin_0_10"
+                                            string="Coin 0.10"
+                                        />
+                                        <field
+                                            name="watermarker_coin_0_10"
+                                            attrs="{'readonly': [('pos_has_active_session', '=', True)]}"
+                                        />
+                                    </div>
+                                    <div class="content-group">
+                                        <label
+                                            class="mx-2"
+                                            for="watermarker_coin_0_05"
+                                            string="Coin 0.05"
+                                        />
+                                        <field
+                                            name="watermarker_coin_0_05"
+                                            attrs="{'readonly': [('pos_has_active_session', '=', True)]}"
+                                        />
+                                    </div>
+                                    <div class="content-group">
+                                        <label
+                                            class="mx-2"
+                                            for="watermarker_coin_0_02"
+                                            string="Coin 0.02"
+                                        />
+                                        <field
+                                            name="watermarker_coin_0_02"
+                                            attrs="{'readonly': [('pos_has_active_session', '=', True)]}"
+                                        />
+                                    </div>
+                                    <div class="content-group">
+                                        <label
+                                            class="mx-2"
+                                            for="watermarker_coin_0_01"
+                                            string="Coin 0.01"
+                                        />
+                                        <field
+                                            name="watermarker_coin_0_01"
+                                            attrs="{'readonly': [('pos_has_active_session', '=', True)]}"
+                                        />
+                                    </div>
+                                </div>
+                                <div class="content-group">
+                                    <label
+                                        class="mx-2"
+                                        for="total_watermarker_coins_bills"
+                                        string="Total Coins/Bills"
+                                    />
+                                    <field name="total_watermarker_coins_bills" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </h2>
+        </field>
+    </record>
+
+</odoo>

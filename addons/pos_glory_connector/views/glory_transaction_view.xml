@@ -1,0 +1,1585 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="glory_transaction_form_view" model="ir.ui.view">
+        <field name="name">glory.transaction.form.view</field>
+        <field name="model">glory.transaction</field>
+        <field name="arch" type="xml">
+            <form create="0" edit="0">
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" />
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="session_id" />
+                            <field name="config_id" />
+                            <field name="order_id" invisible="1"/>
+                            <field
+                                name="company_id"
+                                groups="base.group_multi_company"
+                                options="{'no_create': True}"
+                            />
+                            <field name="datetime" />
+                            <field name="payment_method_id" />
+                            <field name="employee_id" />
+                            <field name="machine_state" />
+                            <field name="operation" />
+                            <field name="is_completed" invisible="1"/>
+                            <separator string="Balance" />
+                            <field
+                                name="payment_amount"
+                                attrs="{'invisible': ['|',('operation', '!=', 'payment_request'), ('is_completed', '=', True)]}"
+                            />
+                            <field name="start_balance"/>
+                            <field
+                                attrs="{'invisible': ['|',('diff_bill_500_00', '&lt;=', 0),('is_completed', '=', True)]}"
+                                name="diff_bill_500_00"
+                                class="text-end text-success"
+                                nolabel="1"
+                            />
+                            <label
+                                attrs="{'invisible': ['|',('diff_bill_500_00', '&lt;=', 0),('is_completed', '=', True)]}"
+                                for="diff_bill_500_00"
+                                class="text-success"
+                                string="x 500.00"
+                            />
+                            <field
+                                attrs="{'invisible': ['|',('diff_bill_200_00', '&lt;=', 0),('is_completed', '=', True)]}"
+                                name="diff_bill_200_00"
+                                class="text-end text-success"
+                                nolabel="1"
+                            />
+                            <label
+                                attrs="{'invisible': ['|',('diff_bill_200_00', '&lt;=', 0),('is_completed', '=', True)]}"
+                                for="diff_bill_200_00"
+                                class="text-success"
+                                string="x 200.00"
+                            />
+                            <field
+                                attrs="{'invisible': ['|',('diff_bill_100_00', '&lt;=', 0),('is_completed', '=', True)]}"
+                                name="diff_bill_100_00"
+                                class="text-end text-success"
+                                nolabel="1"
+                            />
+                            <label
+                                attrs="{'invisible': ['|',('diff_bill_100_00', '&lt;=', 0),('is_completed', '=', True)]}"
+                                for="diff_bill_100_00"
+                                class="text-success"
+                                string="x 100.00"
+                            />
+                            <field
+                                attrs="{'invisible': ['|',('diff_bill_50_00', '&lt;=', 0),('is_completed', '=', True)]}"
+                                name="diff_bill_50_00"
+                                class="text-end text-success"
+                                nolabel="1"
+                            />
+                            <label
+                                attrs="{'invisible': ['|',('diff_bill_50_00', '&lt;=', 0),('is_completed', '=', True)]}"
+                                for="diff_bill_50_00"
+                                class="text-success"
+                                string="x 50.00"
+                            />
+                            <field
+                                attrs="{'invisible': ['|',('diff_bill_20_00', '&lt;=', 0),('is_completed', '=', True)]}"
+                                name="diff_bill_20_00"
+                                class="text-end text-success"
+                                nolabel="1"
+                            />
+                            <label
+                                attrs="{'invisible': ['|',('diff_bill_20_00', '&lt;=', 0),('is_completed', '=', True)]}"
+                                for="diff_bill_20_00"
+                                class="text-success"
+                                string="x 20.00"
+                            />
+                            <field
+                                attrs="{'invisible': ['|',('diff_bill_10_00', '&lt;=', 0),('is_completed', '=', True)]}"
+                                name="diff_bill_10_00"
+                                class="text-end text-success"
+                                nolabel="1"
+                            />
+                            <label
+                                attrs="{'invisible': ['|',('diff_bill_10_00', '&lt;=', 0),('is_completed', '=', True)]}"
+                                for="diff_bill_10_00"
+                                class="text-success"
+                                string="x 10.00"
+                            />
+                            <field
+                                attrs="{'invisible': ['|',('diff_bill_5_00', '&lt;=', 0),('is_completed', '=', True)]}"
+                                name="diff_bill_5_00"
+                                class="text-end text-success"
+                                nolabel="1"
+                            />
+                            <label
+                                attrs="{'invisible': ['|',('diff_bill_5_00', '&lt;=', 0),('is_completed', '=', True)]}"
+                                for="diff_bill_5_00"
+                                class="text-success"
+                                string="x 5.00"
+                            />
+                            <field
+                                attrs="{'invisible': ['|',('diff_coin_2_00', '&lt;=', 0),('is_completed', '=', True)]}"
+                                name="diff_coin_2_00"
+                                class="text-end text-success"
+                                nolabel="1"
+                            />
+                            <label
+                                attrs="{'invisible': ['|',('diff_coin_2_00', '&lt;=', 0),('is_completed', '=', True)]}"
+                                for="diff_coin_2_00"
+                                class="text-success"
+                                string="x 2.00"
+                            />
+                            <field
+                                attrs="{'invisible': ['|',('diff_coin_1_00', '&lt;=', 0),('is_completed', '=', True)]}"
+                                name="diff_coin_1_00"
+                                class="text-end text-success"
+                                nolabel="1"
+                            />
+                            <label
+                                attrs="{'invisible': ['|',('diff_coin_1_00', '&lt;=', 0),('is_completed', '=', True)]}"
+                                for="diff_coin_1_00"
+                                class="text-success"
+                                string="x 1.00"
+                            />
+                            <field
+                                attrs="{'invisible': ['|',('diff_coin_0_50', '&lt;=', 0),('is_completed', '=', True)]}"
+                                name="diff_coin_0_50"
+                                class="text-end text-success"
+                                nolabel="1"
+                            />
+                            <label
+                                attrs="{'invisible': ['|',('diff_coin_0_50', '&lt;=', 0),('is_completed', '=', True)]}"
+                                for="diff_coin_0_50"
+                                class="text-success"
+                                string="x 0.50"
+                            />
+                            <field
+                                attrs="{'invisible': ['|',('diff_coin_0_25', '&lt;=', 0),('is_completed', '=', True)]}"
+                                name="diff_coin_0_25"
+                                class="text-end text-success"
+                                nolabel="1"
+                            />
+                            <label
+                                attrs="{'invisible': ['|',('diff_coin_0_25', '&lt;=', 0),('is_completed', '=', True)]}"
+                                for="diff_coin_0_25"
+                                class="text-success"
+                                string="x 0.25"
+                            />
+                            <field
+                                attrs="{'invisible': ['|',('diff_coin_0_20', '&lt;=', 0),('is_completed', '=', True)]}"
+                                name="diff_coin_0_20"
+                                class="text-end text-success"
+                                nolabel="1"
+                            />
+                            <label
+                                attrs="{'invisible': ['|',('diff_coin_0_20', '&lt;=', 0),('is_completed', '=', True)]}"
+                                for="diff_coin_0_20"
+                                class="text-success"
+                                string="x 0.20"
+                            />
+                            <field
+                                attrs="{'invisible': ['|',('diff_coin_0_10', '&lt;=', 0),('is_completed', '=', True)]}"
+                                name="diff_coin_0_10"
+                                class="text-end text-success"
+                                nolabel="1"
+                            />
+                            <label
+                                attrs="{'invisible': ['|',('diff_coin_0_10', '&lt;=', 0),('is_completed', '=', True)]}"
+                                for="diff_coin_0_10"
+                                class="text-success"
+                                string="x 0.10"
+                            />
+                            <field
+                                attrs="{'invisible': ['|',('diff_coin_0_05', '&lt;=', 0),('is_completed', '=', True)]}"
+                                name="diff_coin_0_05"
+                                class="text-end text-success"
+                                nolabel="1"
+                            />
+                            <label
+                                attrs="{'invisible': ['|',('diff_coin_0_05', '&lt;=', 0),('is_completed', '=', True)]}"
+                                for="diff_coin_0_05"
+                                class="text-success"
+                                string="x 0.05"
+                            />
+                            <field
+                                attrs="{'invisible': ['|',('diff_coin_0_02', '&lt;=', 0),('is_completed', '=', True)]}"
+                                name="diff_coin_0_02"
+                                class="text-end text-success"
+                                nolabel="1"
+                            />
+                            <label
+                                attrs="{'invisible': ['|',('diff_coin_0_02', '&lt;=', 0),('is_completed', '=', True)]}"
+                                for="diff_coin_0_02"
+                                class="text-success"
+                                string="x 0.02"
+                            />
+                            <field
+                                attrs="{'invisible': ['|',('diff_coin_0_01', '&lt;=', 0),('is_completed', '=', True)]}"
+                                name="diff_coin_0_01"
+                                class="text-end text-success"
+                                nolabel="1"
+                            />
+                            <label
+                                attrs="{'invisible': ['|',('diff_coin_0_01', '&lt;=', 0),('is_completed', '=', True)]}"
+                                for="diff_coin_0_01"
+                                class="text-success"
+                                string="x 0.01"
+                            />
+                            <field name="amount" />
+                            <field
+                                attrs="{'invisible': ['|',('diff_bill_500_00', '&gt;=', 0),('is_completed', '=', True)]}"
+                                name="diff_bill_500_00"
+                                class="text-end text-danger"
+                                nolabel="1"
+                            />
+                            <label
+                                attrs="{'invisible': ['|',('diff_bill_500_00', '&gt;=', 0),('is_completed', '=', True)]}"
+                                for="diff_bill_500_00"
+                                class="text-danger"
+                                string="x 500.00"
+                            />
+                            <field
+                                attrs="{'invisible': ['|',('diff_bill_200_00', '&gt;=', 0),('is_completed', '=', True)]}"
+                                name="diff_bill_200_00"
+                                class="text-end text-danger"
+                                nolabel="1"
+                            />
+                            <label
+                                attrs="{'invisible': ['|',('diff_bill_200_00', '&gt;=', 0),('is_completed', '=', True)]}"
+                                for="diff_bill_200_00"
+                                class="text-danger"
+                                string="x 200.00"
+                            />
+                            <field
+                                attrs="{'invisible': ['|',('diff_bill_100_00', '&gt;=', 0),('is_completed', '=', True)]}"
+                                name="diff_bill_100_00"
+                                class="text-end text-danger"
+                                nolabel="1"
+                            />
+                            <label
+                                attrs="{'invisible': ['|',('diff_bill_100_00', '&gt;=', 0),('is_completed', '=', True)]}"
+                                for="diff_bill_100_00"
+                                class="text-danger"
+                                string="x 100.00"
+                            />
+                            <field
+                                attrs="{'invisible': ['|',('diff_bill_50_00', '&gt;=', 0),('is_completed', '=', True)]}"
+                                name="diff_bill_50_00"
+                                class="text-end text-danger"
+                                nolabel="1"
+                            />
+                            <label
+                                attrs="{'invisible': ['|',('diff_bill_50_00', '&gt;=', 0),('is_completed', '=', True)]}"
+                                for="diff_bill_50_00"
+                                class="text-danger"
+                                string="x 50.00"
+                            />
+                            <field
+                                attrs="{'invisible': ['|',('diff_bill_20_00', '&gt;=', 0),('is_completed', '=', True)]}"
+                                name="diff_bill_20_00"
+                                class="text-end text-danger"
+                                nolabel="1"
+                            />
+                            <label
+                                attrs="{'invisible': ['|',('diff_bill_20_00', '&gt;=', 0),('is_completed', '=', True)]}"
+                                for="diff_bill_20_00"
+                                class="text-danger"
+                                string="x 20.00"
+                            />
+                            <field
+                                attrs="{'invisible': ['|',('diff_bill_10_00', '&gt;=', 0),('is_completed', '=', True)]}"
+                                name="diff_bill_10_00"
+                                class="text-end text-danger"
+                                nolabel="1"
+                            />
+                            <label
+                                attrs="{'invisible': ['|',('diff_bill_10_00', '&gt;=', 0),('is_completed', '=', True)]}"
+                                for="diff_bill_10_00"
+                                class="text-danger"
+                                string="x 10.00"
+                            />
+                            <field
+                                attrs="{'invisible': ['|',('diff_bill_5_00', '&gt;=', 0),('is_completed', '=', True)]}"
+                                name="diff_bill_5_00"
+                                class="text-end text-danger"
+                                nolabel="1"
+                            />
+                            <label
+                                attrs="{'invisible': ['|',('diff_bill_5_00', '&gt;=', 0),('is_completed', '=', True)]}"
+                                for="diff_bill_5_00"
+                                class="text-danger"
+                                string="x 5.00"
+                            />
+                            <field
+                                attrs="{'invisible': ['|',('diff_coin_2_00', '&gt;=', 0),('is_completed', '=', True)]}"
+                                name="diff_coin_2_00"
+                                class="text-end text-danger"
+                                nolabel="1"
+                            />
+                            <label
+                                attrs="{'invisible': ['|',('diff_coin_2_00', '&gt;=', 0),('is_completed', '=', True)]}"
+                                for="diff_coin_2_00"
+                                class="text-danger"
+                                string="x 2.00"
+                            />
+                            <field
+                                attrs="{'invisible': ['|',('diff_coin_1_00', '&gt;=', 0),('is_completed', '=', True)]}"
+                                name="diff_coin_1_00"
+                                class="text-end text-danger"
+                                nolabel="1"
+                            />
+                            <label
+                                attrs="{'invisible': ['|',('diff_coin_1_00', '&gt;=', 0),('is_completed', '=', True)]}"
+                                for="diff_coin_1_00"
+                                class="text-danger"
+                                string="x 1.00"
+                            />
+                            <field
+                                attrs="{'invisible': ['|',('diff_coin_0_50', '&gt;=', 0),('is_completed', '=', True)]}"
+                                name="diff_coin_0_50"
+                                class="text-end text-danger"
+                                nolabel="1"
+                            />
+                            <label
+                                attrs="{'invisible': ['|',('diff_coin_0_50', '&gt;=', 0),('is_completed', '=', True)]}"
+                                for="diff_coin_0_50"
+                                class="text-danger"
+                                string="x 0.50"
+                            />
+                            <field
+                                attrs="{'invisible': ['|',('diff_coin_0_25', '&gt;=', 0),('is_completed', '=', True)]}"
+                                name="diff_coin_0_25"
+                                class="text-end text-danger"
+                                nolabel="1"
+                            />
+                            <label
+                                attrs="{'invisible': ['|',('diff_coin_0_25', '&gt;=', 0),('is_completed', '=', True)]}"
+                                for="diff_coin_0_25"
+                                class="text-danger"
+                                string="x 0.25"
+                            />
+                            <field
+                                attrs="{'invisible': ['|',('diff_coin_0_20', '&gt;=', 0),('is_completed', '=', True)]}"
+                                name="diff_coin_0_20"
+                                class="text-end text-danger"
+                                nolabel="1"
+                            />
+                            <label
+                                attrs="{'invisible': ['|',('diff_coin_0_20', '&gt;=', 0),('is_completed', '=', True)]}"
+                                for="diff_coin_0_20"
+                                class="text-danger"
+                                string="x 0.20"
+                            />
+                            <field
+                                attrs="{'invisible': ['|',('diff_coin_0_10', '&gt;=', 0),('is_completed', '=', True)]}"
+                                name="diff_coin_0_10"
+                                class="text-end text-danger"
+                                nolabel="1"
+                            />
+                            <label
+                                attrs="{'invisible': ['|',('diff_coin_0_10', '&gt;=', 0),('is_completed', '=', True)]}"
+                                for="diff_coin_0_10"
+                                class="text-danger"
+                                string="x 0.10"
+                            />
+                            <field
+                                attrs="{'invisible': ['|',('diff_coin_0_05', '&gt;=', 0),('is_completed', '=', True)]}"
+                                name="diff_coin_0_05"
+                                class="text-end text-danger"
+                                nolabel="1"
+                            />
+                            <label
+                                attrs="{'invisible': ['|',('diff_coin_0_05', '&gt;=', 0),('is_completed', '=', True)]}"
+                                for="diff_coin_0_05"
+                                class="text-danger"
+                                string="x 0.05"
+                            />
+                            <field
+                                attrs="{'invisible': ['|',('diff_coin_0_02', '&gt;=', 0),('is_completed', '=', True)]}"
+                                name="diff_coin_0_02"
+                                class="text-end text-danger"
+                                nolabel="1"
+                            />
+                            <label
+                                attrs="{'invisible': ['|',('diff_coin_0_02', '&gt;=', 0),('is_completed', '=', True)]}"
+                                for="diff_coin_0_02"
+                                class="text-danger"
+                                string="x 0.02"
+                            />
+                            <field
+                                attrs="{'invisible': ['|',('diff_coin_0_01', '&gt;=', 0),('is_completed', '=', True)]}"
+                                name="diff_coin_0_01"
+                                class="text-end text-danger"
+                                nolabel="1"
+                            />
+                            <label
+                                attrs="{'invisible': ['|',('diff_coin_0_01', '&gt;=', 0),('is_completed', '=', True)]}"
+                                for="diff_coin_0_01"
+                                class="text-danger"
+                                string="x 0.01"
+                            />
+                            <field
+                                name="rest_amount"
+                                attrs="{'invisible': [
+                                    '|',
+                                    ('operation', '!=', 'payment_request'),
+                                    ('is_completed', '=', True)
+                                ]}"
+                            />
+                            <field name="end_balance"/>
+                        </group>
+                        <group string="Total Glory">
+                            <group string="Bills">
+                                <label for="bill_500_00" />
+                                <div class="o_row">
+                                    <field name="bill_500_00" />
+                                    <field
+                                        name="diff_bill_500_00"
+                                        class="text-danger"
+                                        attrs="{'invisible': [ '|',('diff_bill_500_00', '&gt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                    <field
+                                        name="diff_bill_500_00"
+                                        class="text-success"
+                                        attrs="{'invisible': [ '|',('diff_bill_500_00', '&lt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                </div>
+                                <label for="bill_200_00" />
+                                <div class="o_row">
+                                    <field name="bill_200_00" />
+                                    <field
+                                        name="diff_bill_200_00"
+                                        class="text-danger"
+                                        attrs="{'invisible': [ '|',('diff_bill_200_00', '&gt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                    <field
+                                        name="diff_bill_200_00"
+                                        class="text-success"
+                                        attrs="{'invisible': [ '|',('diff_bill_200_00', '&lt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                </div>
+                                <label for="bill_100_00" />
+                                <div class="o_row">
+                                    <field name="bill_100_00" />
+                                    <field
+                                        name="diff_bill_100_00"
+                                        class="text-danger"
+                                        attrs="{'invisible': [ '|',('diff_bill_100_00', '&gt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                    <field
+                                        name="diff_bill_100_00"
+                                        class="text-success"
+                                        attrs="{'invisible': [ '|',('diff_bill_100_00', '&lt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                </div>
+                                <label for="bill_50_00" />
+                                <div class="o_row">
+                                    <field name="bill_50_00" />
+                                    <field
+                                        name="diff_bill_50_00"
+                                        class="text-danger"
+                                        attrs="{'invisible': [ '|',('diff_bill_50_00', '&gt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                    <field
+                                        name="diff_bill_50_00"
+                                        class="text-success"
+                                        attrs="{'invisible': [ '|',('diff_bill_50_00', '&lt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                </div>
+                                <label for="bill_20_00" />
+                                <div class="o_row">
+                                    <field name="bill_20_00" />
+                                    <field
+                                        name="diff_bill_20_00"
+                                        class="text-danger"
+                                        attrs="{'invisible': [ '|',('diff_bill_20_00', '&gt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                    <field
+                                        name="diff_bill_20_00"
+                                        class="text-success"
+                                        attrs="{'invisible': [ '|',('diff_bill_20_00', '&lt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                </div>
+                                <label for="bill_10_00" />
+                                <div class="o_row">
+                                    <field name="bill_10_00" />
+                                    <field
+                                        name="diff_bill_10_00"
+                                        class="text-danger"
+                                        attrs="{'invisible': [ '|',('diff_bill_10_00', '&gt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                    <field
+                                        name="diff_bill_10_00"
+                                        class="text-success"
+                                        attrs="{'invisible': [ '|',('diff_bill_10_00', '&lt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                </div>
+                                <label for="bill_5_00" />
+                                <div class="o_row">
+                                    <field name="bill_5_00" />
+                                    <field
+                                        name="diff_bill_5_00"
+                                        class="text-danger"
+                                        attrs="{'invisible': [ '|',('diff_bill_5_00', '&gt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                    <field
+                                        name="diff_bill_5_00"
+                                        class="text-success"
+                                        attrs="{'invisible': [ '|',('diff_bill_5_00', '&lt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                </div>
+                                <field name="total_bills" attrs="{'invisible': [('is_completed', '=', True)]}"/>
+                            </group>
+                            <group string="Coins">
+                                <label for="coin_2_00" />
+                                <div class="o_row">
+                                    <field name="coin_2_00" />
+                                    <field
+                                        name="diff_coin_2_00"
+                                        class="text-danger"
+                                        attrs="{'invisible': [ '|',('diff_coin_2_00', '&gt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                    <field
+                                        name="diff_coin_2_00"
+                                        class="text-success"
+                                        attrs="{'invisible': [ '|',('diff_coin_2_00', '&lt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                </div>
+                                <label for="coin_1_00" />
+                                <div class="o_row">
+                                    <field name="coin_1_00" />
+                                    <field
+                                        name="diff_coin_1_00"
+                                        class="text-danger"
+                                        attrs="{'invisible': [ '|',('diff_coin_1_00', '&gt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                    <field
+                                        name="diff_coin_1_00"
+                                        class="text-success"
+                                        attrs="{'invisible': [ '|',('diff_coin_1_00', '&lt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                </div>
+                                <label for="coin_0_50" />
+                                <div class="o_row">
+                                    <field name="coin_0_50" />
+                                    <field
+                                        name="diff_coin_0_50"
+                                        class="text-danger"
+                                        attrs="{'invisible': [ '|',('diff_coin_0_50', '&gt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                    <field
+                                        name="diff_coin_0_50"
+                                        class="text-success"
+                                        attrs="{'invisible': [ '|',('diff_coin_0_50', '&lt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                </div>
+                                <label for="coin_0_25" />
+                                <div class="o_row">
+                                    <field name="coin_0_25" />
+                                    <field
+                                        name="diff_coin_0_25"
+                                        class="text-danger"
+                                        attrs="{'invisible': [ '|',('diff_coin_0_25', '&gt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                    <field
+                                        name="diff_coin_0_25"
+                                        class="text-success"
+                                        attrs="{'invisible': [ '|',('diff_coin_0_25', '&lt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                </div>
+                                <label for="coin_0_20" />
+                                <div class="o_row">
+                                    <field name="coin_0_20" />
+                                    <field
+                                        name="diff_coin_0_20"
+                                        class="text-danger"
+                                        attrs="{'invisible': [ '|',('diff_coin_0_20', '&gt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                    <field
+                                        name="diff_coin_0_20"
+                                        class="text-success"
+                                        attrs="{'invisible': [ '|',('diff_coin_0_20', '&lt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                </div>
+                                <label for="coin_0_10" />
+                                <div class="o_row">
+                                    <field name="coin_0_10" />
+                                    <field
+                                        name="diff_coin_0_10"
+                                        class="text-danger"
+                                        attrs="{'invisible': [ '|',('diff_coin_0_10', '&gt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                    <field
+                                        name="diff_coin_0_10"
+                                        class="text-success"
+                                        attrs="{'invisible': [ '|',('diff_coin_0_10', '&lt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                </div>
+                                <label for="coin_0_05" />
+                                <div class="o_row">
+                                    <field name="coin_0_05" />
+                                    <field
+                                        name="diff_coin_0_05"
+                                        class="text-danger"
+                                        attrs="{'invisible': [ '|',('diff_coin_0_05', '&gt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                    <field
+                                        name="diff_coin_0_05"
+                                        class="text-success"
+                                        attrs="{'invisible': [ '|',('diff_coin_0_05', '&lt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                </div>
+                                <label for="coin_0_02" />
+                                <div class="o_row">
+                                    <field name="coin_0_02" />
+                                    <field
+                                        name="diff_coin_0_02"
+                                        class="text-danger"
+                                        attrs="{'invisible': [ '|',('diff_coin_0_02', '&gt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                    <field
+                                        name="diff_coin_0_02"
+                                        class="text-success"
+                                        attrs="{'invisible': [ '|',('diff_coin_0_02', '&lt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                </div>
+                                <label for="coin_0_01" />
+                                <div class="o_row">
+                                    <field name="coin_0_01" />
+                                    <field
+                                        name="diff_coin_0_01"
+                                        class="text-danger"
+                                        attrs="{'invisible': [ '|',('diff_coin_0_01', '&gt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                    <field
+                                        name="diff_coin_0_01"
+                                        class="text-success"
+                                        attrs="{'invisible': [ '|',('diff_coin_0_01', '&lt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                </div>
+                                <field name="total_coins" attrs="{'invisible': [('is_completed', '=', True)]}"/>
+                            </group>
+                        </group>
+                        <field name="is_completed" invisible="1"/>
+                        <group string="Total Stacker">
+                            <group string="Bills">
+                                <label for="stacker_bill_500_00" />
+                                <div class="o_row">
+                                    <field name="stacker_bill_500_00" />
+                                    <field
+                                        name="diff_stacker_bill_500_00"
+                                        class="text-danger"
+                                        attrs="{'invisible': [ '|',('diff_stacker_bill_500_00', '&gt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                    <field
+                                        name="diff_stacker_bill_500_00"
+                                        class="text-success"
+                                        attrs="{'invisible': [ '|',('diff_stacker_bill_500_00', '&lt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                </div>
+                                <label for="stacker_bill_200_00" />
+                                <div class="o_row">
+                                    <field name="stacker_bill_200_00" />
+                                    <field
+                                        name="diff_stacker_bill_200_00"
+                                        class="text-danger"
+                                        attrs="{'invisible': [ '|',('diff_stacker_bill_200_00', '&gt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                    <field
+                                        name="diff_stacker_bill_200_00"
+                                        class="text-success"
+                                        attrs="{'invisible': [ '|',('diff_stacker_bill_200_00', '&lt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                </div>
+                                <label for="stacker_bill_100_00" />
+                                <div class="o_row">
+                                    <field name="stacker_bill_100_00" />
+                                    <field
+                                        name="diff_stacker_bill_100_00"
+                                        class="text-danger"
+                                        attrs="{'invisible': ['|',('diff_stacker_bill_100_00', '&gt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                    <field
+                                        name="diff_stacker_bill_100_00"
+                                        class="text-success"
+                                        attrs="{'invisible': ['|',('diff_stacker_bill_100_00', '&lt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                </div>
+                                <label for="stacker_bill_50_00" />
+                                <div class="o_row">
+                                    <field name="stacker_bill_50_00" />
+                                    <field
+                                        name="stacker_bill_50_00"
+                                        class="text-danger"
+                                        attrs="{'invisible': ['|',('diff_stacker_bill_50_00', '&gt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                    <field
+                                        name="diff_stacker_bill_50_00"
+                                        class="text-success"
+                                        attrs="{'invisible': ['|',('diff_stacker_bill_50_00', '&lt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                </div>
+                                <label for="stacker_bill_20_00" />
+                                <div class="o_row">
+                                    <field name="stacker_bill_20_00" />
+                                    <field
+                                        name="diff_stacker_bill_20_00"
+                                        class="text-danger"
+                                        attrs="{'invisible': ['|',('diff_stacker_bill_20_00', '&gt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                    <field
+                                        name="diff_stacker_bill_20_00"
+                                        class="text-success"
+                                        attrs="{'invisible': ['|',('diff_stacker_bill_20_00', '&lt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                </div>
+                                <label for="stacker_bill_10_00" />
+                                <div class="o_row">
+                                    <field name="stacker_bill_10_00" />
+                                    <field
+                                        name="diff_stacker_bill_10_00"
+                                        class="text-danger"
+                                        attrs="{'invisible': ['|',('diff_stacker_bill_10_00', '&gt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                    <field
+                                        name="diff_stacker_bill_10_00"
+                                        class="text-success"
+                                        attrs="{'invisible': ['|',('diff_stacker_bill_10_00', '&lt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                </div>
+                                <label for="stacker_bill_5_00" />
+                                <div class="o_row">
+                                    <field name="stacker_bill_5_00" />
+                                    <field
+                                        name="diff_stacker_bill_5_00"
+                                        class="text-danger"
+                                        attrs="{'invisible': ['|',('diff_stacker_bill_5_00', '&gt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                    <field
+                                        name="diff_stacker_bill_5_00"
+                                        class="text-success"
+                                        attrs="{'invisible': ['|',('diff_stacker_bill_5_00', '&lt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                </div>
+                                <field name="total_stacker_bills" attrs="{'invisible': [('is_completed', '=', True)]}"/>
+                            </group>
+                            <group string="Coins">
+                                <label for="stacker_coin_2_00" />
+                                <div class="o_row">
+                                    <field name="stacker_coin_2_00" />
+                                    <field
+                                        name="diff_stacker_coin_2_00"
+                                        class="text-danger"
+                                        attrs="{'invisible': ['|',('diff_stacker_coin_2_00', '&gt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                    <field
+                                        name="diff_stacker_coin_2_00"
+                                        class="text-success"
+                                        attrs="{'invisible': ['|',('diff_stacker_coin_2_00', '&lt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                </div>
+                                <label for="stacker_coin_1_00" />
+                                <div class="o_row">
+                                    <field name="stacker_coin_1_00" />
+                                    <field
+                                        name="diff_stacker_coin_1_00"
+                                        class="text-danger"
+                                        attrs="{'invisible': ['|',('diff_stacker_coin_1_00', '&gt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                    <field
+                                        name="diff_stacker_coin_1_00"
+                                        class="text-success"
+                                        attrs="{'invisible': ['|',('diff_stacker_coin_1_00', '&lt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                </div>
+                                <label for="stacker_coin_0_50" />
+                                <div class="o_row">
+                                    <field name="stacker_coin_0_50" />
+                                    <field
+                                        name="diff_stacker_coin_0_50"
+                                        class="text-danger"
+                                        attrs="{'invisible': ['|',('diff_stacker_coin_0_50', '&gt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                    <field
+                                        name="diff_stacker_coin_0_50"
+                                        class="text-success"
+                                        attrs="{'invisible': ['|',('diff_stacker_coin_0_50', '&lt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                </div>
+                                <label for="stacker_coin_0_25" />
+                                <div class="o_row">
+                                    <field name="stacker_coin_0_25" />
+                                    <field
+                                        name="diff_stacker_coin_0_25"
+                                        class="text-danger"
+                                        attrs="{'invisible': ['|',('diff_stacker_coin_0_25', '&gt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                    <field
+                                        name="diff_stacker_coin_0_25"
+                                        class="text-success"
+                                        attrs="{'invisible': ['|',('diff_stacker_coin_0_25', '&lt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                </div>
+                                <label for="stacker_coin_0_20" />
+                                <div class="o_row">
+                                    <field name="stacker_coin_0_20" />
+                                    <field
+                                        name="diff_stacker_coin_0_20"
+                                        class="text-danger"
+                                        attrs="{'invisible': ['|',('diff_stacker_coin_0_20', '&gt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                    <field
+                                        name="diff_stacker_coin_0_20"
+                                        class="text-success"
+                                        attrs="{'invisible': ['|',('diff_stacker_coin_0_20', '&lt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                </div>
+                                <label for="stacker_coin_0_10" />
+                                <div class="o_row">
+                                    <field name="stacker_coin_0_10" />
+                                    <field
+                                        name="diff_stacker_coin_0_10"
+                                        class="text-danger"
+                                        attrs="{'invisible': ['|',('diff_stacker_coin_0_10', '&gt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                    <field
+                                        name="diff_stacker_coin_0_10"
+                                        class="text-success"
+                                        attrs="{'invisible': ['|',('diff_stacker_coin_0_10', '&lt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                </div>
+                                <label for="stacker_coin_0_05" />
+                                <div class="o_row">
+                                    <field name="stacker_coin_0_05" />
+                                    <field
+                                        name="diff_stacker_coin_0_05"
+                                        class="text-danger"
+                                        attrs="{'invisible': ['|',('diff_stacker_coin_0_05', '&gt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                    <field
+                                        name="diff_stacker_coin_0_05"
+                                        class="text-success"
+                                        attrs="{'invisible': ['|',('diff_stacker_coin_0_05', '&lt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                </div>
+                                <label for="stacker_coin_0_02" />
+                                <div class="o_row">
+                                    <field name="stacker_coin_0_02" />
+                                    <field
+                                        name="diff_stacker_coin_0_02"
+                                        class="text-danger"
+                                        attrs="{'invisible': ['|',('diff_stacker_coin_0_02', '&gt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                    <field
+                                        name="diff_stacker_coin_0_02"
+                                        class="text-success"
+                                        attrs="{'invisible': ['|',('diff_stacker_coin_0_02', '&lt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                </div>
+                                <label for="stacker_coin_0_01" />
+                                <div class="o_row">
+                                    <field name="stacker_coin_0_01" />
+                                    <field
+                                        name="diff_stacker_coin_0_01"
+                                        class="text-danger"
+                                        attrs="{'invisible': ['|',('diff_stacker_coin_0_01', '&gt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                    <field
+                                        name="diff_stacker_coin_0_01"
+                                        class="text-success"
+                                        attrs="{'invisible': ['|',('diff_stacker_coin_0_01', '&lt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                </div>
+                                <field name="total_stacker_coins" attrs="{'invisible': [('is_completed', '=', True)]}"/>
+                            </group>
+                        </group>
+                        <field name="is_completed" invisible="1"/>
+                        <group string="Total Cassette">
+                            <group string="Bills">
+                                <label for="cassette_bill_500_00" />
+                                <div class="o_row">
+                                    <field name="cassette_bill_500_00" />
+                                    <field
+                                        name="diff_cassette_bill_500_00"
+                                        class="text-danger"
+                                        attrs="{'invisible': ['|',('diff_cassette_bill_500_00', '&gt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                    <field
+                                        name="diff_cassette_bill_500_00"
+                                        class="text-success"
+                                        attrs="{'invisible': ['|',('diff_cassette_bill_500_00', '&lt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                </div>
+                                <label for="cassette_bill_200_00" />
+                                <div class="o_row">
+                                    <field name="cassette_bill_200_00" />
+                                    <field
+                                        name="diff_cassette_bill_200_00"
+                                        class="text-danger"
+                                        attrs="{'invisible': ['|',('diff_cassette_bill_200_00', '&gt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                    <field
+                                        name="diff_cassette_bill_200_00"
+                                        class="text-success"
+                                        attrs="{'invisible': ['|',('diff_cassette_bill_200_00', '&lt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                </div>
+                                <label for="cassette_bill_100_00" />
+                                <div class="o_row">
+                                    <field name="cassette_bill_100_00" />
+                                    <field
+                                        name="diff_cassette_bill_100_00"
+                                        class="text-danger"
+                                        attrs="{'invisible': ['|',('diff_cassette_bill_100_00', '&gt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                    <field
+                                        name="diff_cassette_bill_100_00"
+                                        class="text-success"
+                                        attrs="{'invisible': ['|',('diff_cassette_bill_100_00', '&lt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                </div>
+                                <label for="cassette_bill_50_00" />
+                                <div class="o_row">
+                                    <field name="cassette_bill_50_00" />
+                                    <field
+                                        name="diff_cassette_bill_50_00"
+                                        class="text-danger"
+                                        attrs="{'invisible': ['|',('diff_cassette_bill_50_00', '&gt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                    <field
+                                        name="diff_cassette_bill_50_00"
+                                        class="text-success"
+                                        attrs="{'invisible': ['|',('diff_cassette_bill_50_00', '&lt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                </div>
+                                <label for="cassette_bill_20_00" />
+                                <div class="o_row">
+                                    <field name="cassette_bill_20_00" />
+                                    <field
+                                        name="diff_cassette_bill_20_00"
+                                        class="text-danger"
+                                        attrs="{'invisible': ['|',('diff_cassette_bill_20_00', '&gt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                    <field
+                                        name="diff_cassette_bill_20_00"
+                                        class="text-success"
+                                        attrs="{'invisible': ['|',('diff_cassette_bill_20_00', '&lt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                </div>
+                                <label for="cassette_bill_10_00" />
+                                <div class="o_row">
+                                    <field name="cassette_bill_10_00" />
+                                    <field
+                                        name="diff_cassette_bill_10_00"
+                                        class="text-danger"
+                                        attrs="{'invisible': ['|',('diff_cassette_bill_10_00', '&gt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                    <field
+                                        name="diff_cassette_bill_10_00"
+                                        class="text-success"
+                                        attrs="{'invisible': ['|',('diff_cassette_bill_10_00', '&lt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                </div>
+                                <label for="cassette_bill_5_00" />
+                                <div class="o_row">
+                                    <field name="cassette_bill_5_00" />
+                                    <field
+                                        name="diff_cassette_bill_5_00"
+                                        class="text-danger"
+                                        attrs="{'invisible': ['|',('diff_cassette_bill_5_00', '&gt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                    <field
+                                        name="diff_cassette_bill_5_00"
+                                        class="text-success"
+                                        attrs="{'invisible': ['|',('diff_cassette_bill_5_00', '&lt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                </div>
+                                <field name="total_cassette_bills" attrs="{'invisible': [('is_completed', '=', True)]}"/>
+                            </group>
+                            <group string="Coins">
+                                <label for="cassette_coin_2_00" />
+                                <div class="o_row">
+                                    <field name="cassette_coin_2_00" />
+                                    <field
+                                        name="diff_cassette_coin_2_00"
+                                        class="text-danger"
+                                        attrs="{'invisible': ['|',('diff_cassette_coin_2_00', '&gt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                    <field
+                                        name="diff_cassette_coin_2_00"
+                                        class="text-success"
+                                        attrs="{'invisible': ['|',('diff_cassette_coin_2_00', '&lt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                </div>
+                                <label for="cassette_coin_1_00" />
+                                <div class="o_row">
+                                    <field name="cassette_coin_1_00" />
+                                    <field
+                                        name="diff_cassette_coin_1_00"
+                                        class="text-danger"
+                                        attrs="{'invisible': ['|',('diff_cassette_coin_1_00', '&gt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                    <field
+                                        name="diff_cassette_coin_1_00"
+                                        class="text-success"
+                                        attrs="{'invisible': ['|',('diff_cassette_coin_1_00', '&lt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                </div>
+                                <label for="cassette_coin_0_50" />
+                                <div class="o_row">
+                                    <field name="cassette_coin_0_50" />
+                                    <field
+                                        name="diff_cassette_coin_0_50"
+                                        class="text-danger"
+                                        attrs="{'invisible': ['|',('diff_cassette_coin_0_50', '&gt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                    <field
+                                        name="diff_cassette_coin_0_50"
+                                        class="text-success"
+                                        attrs="{'invisible': ['|',('diff_cassette_coin_0_50', '&lt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                </div>
+                                <label for="cassette_coin_0_25" />
+                                <div class="o_row">
+                                    <field name="cassette_coin_0_25" />
+                                    <field
+                                        name="diff_cassette_coin_0_25"
+                                        class="text-danger"
+                                        attrs="{'invisible': ['|',('diff_cassette_coin_0_25', '&gt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                    <field
+                                        name="diff_cassette_coin_0_25"
+                                        class="text-success"
+                                        attrs="{'invisible': ['|',('diff_cassette_coin_0_25', '&lt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                </div>
+                                <label for="cassette_coin_0_20" />
+                                <div class="o_row">
+                                    <field name="cassette_coin_0_20" />
+                                    <field
+                                        name="diff_cassette_coin_0_20"
+                                        class="text-danger"
+                                        attrs="{'invisible': ['|',('diff_cassette_coin_0_20', '&gt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                    <field
+                                        name="diff_cassette_coin_0_20"
+                                        class="text-success"
+                                        attrs="{'invisible': ['|',('diff_cassette_coin_0_20', '&lt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                </div>
+                                <label for="cassette_coin_0_10" />
+                                <div class="o_row">
+                                    <field name="cassette_coin_0_10" />
+                                    <field
+                                        name="diff_cassette_coin_0_10"
+                                        class="text-danger"
+                                        attrs="{'invisible': ['|',('diff_cassette_coin_0_10', '&gt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                    <field
+                                        name="diff_cassette_coin_0_10"
+                                        class="text-success"
+                                        attrs="{'invisible': ['|',('diff_cassette_coin_0_10', '&lt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                </div>
+                                <label for="cassette_coin_0_05" />
+                                <div class="o_row">
+                                    <field name="cassette_coin_0_05" />
+                                    <field
+                                        name="diff_cassette_coin_0_05"
+                                        class="text-danger"
+                                        attrs="{'invisible': ['|',('diff_cassette_coin_0_05', '&gt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                    <field
+                                        name="diff_cassette_coin_0_05"
+                                        class="text-success"
+                                        attrs="{'invisible': ['|',('diff_cassette_coin_0_05', '&lt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                </div>
+                                <label for="cassette_coin_0_02" />
+                                <div class="o_row">
+                                    <field name="cassette_coin_0_02" />
+                                    <field
+                                        name="diff_cassette_coin_0_02"
+                                        class="text-danger"
+                                        attrs="{'invisible': ['|',('diff_cassette_coin_0_02', '&gt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                    <field
+                                        name="diff_cassette_coin_0_02"
+                                        class="text-success"
+                                        attrs="{'invisible': ['|',('diff_cassette_coin_0_02', '&lt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                </div>
+                                <label for="cassette_coin_0_01" />
+                                <div class="o_row">
+                                    <field name="cassette_coin_0_01" />
+                                    <field
+                                        name="diff_cassette_coin_0_01"
+                                        class="text-danger"
+                                        attrs="{'invisible': ['|',('diff_cassette_coin_0_01', '&gt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                    <field
+                                        name="diff_cassette_coin_0_01"
+                                        class="text-success"
+                                        attrs="{'invisible': ['|',('diff_cassette_coin_0_01', '&lt;=', 0),('is_completed', '=', True)]}"
+                                    />
+                                </div>
+                                <field name="total_cassette_coins" attrs="{'invisible': [('is_completed', '=', True)]}"/>
+                            </group>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="glory_transaction_form_last_transaction_view" model="ir.ui.view">
+        <field name="name">glory.transaction.form.last.transaction.view</field>
+        <field name="model">glory.transaction</field>
+        <field name="mode">primary</field>
+        <field name="priority">999</field>
+        <field name="arch" type="xml">
+            <form create="0" edit="0">
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" />
+                        </h1>
+                    </div>
+                    <group>
+                        <field name="end_balance" string="Inventory" />
+                        <field name="total_cassette" string="Inventory cassette" />
+                    </group>
+                    <group string="Bills">
+                        <group>
+                            <field name="total_cassette_bills" />
+                            <field
+                                name="state_cassette_bills"
+                                widget="badge"
+                                decoration-success="state_cassette_bills == 'normal'"
+                                decoration-warning="state_cassette_bills in ['low', 'high']"
+                                decoration-danger="state_cassette_bills in ['empty', 'full']"
+                            />
+                            <label for="cassette_bill_500_00" string="500.00 x " />
+                            <div class="o_row">
+                                <field name="cassette_bill_500_00" />
+                            </div>
+                            <label for="cassette_bill_200_00" string="200.00 x " />
+                            <div class="o_row">
+                                <field name="cassette_bill_200_00" />
+                            </div>
+                            <label for="cassette_bill_100_00" string="100.00 x " />
+                            <div class="o_row">
+                                <field name="cassette_bill_100_00" />
+                            </div>
+                            <label for="cassette_bill_50_00" string="50.00 x " />
+                            <div class="o_row">
+                                <field name="cassette_bill_50_00" />
+                            </div>
+                            <label for="cassette_bill_20_00" string="20.00 x " />
+                            <div class="o_row">
+                                <field name="cassette_bill_20_00" />
+                            </div>
+                            <label for="cassette_bill_10_00" string="10.00 x " />
+                            <div class="o_row">
+                                <field name="cassette_bill_10_00" />
+                            </div>
+                            <label for="cassette_bill_5_00" string="5.00 x " />
+                            <div class="o_row">
+                                <field name="cassette_bill_5_00" />
+                            </div>
+                        </group>
+                        <group>
+                            <div
+                                attrs="{'invisible': [('state_cassette_bills', '!=', 'normal')]}"
+                                style="width: 150px; margin-top: 10rem !important; padding-top: 10rem !important;"
+                                class="pb-0 mb-0 p-5 m-5 border border-primary bg-success"
+                            >
+                                <h4
+                                    class="mb-0 pb-0 text-center align-text-bottom text-white"
+                                >
+                                    <field name="total_cassette_bills" />
+                                </h4>
+                            </div>
+                            <div
+                                attrs="{'invisible': [('state_cassette_bills', '!=', 'high')]}"
+                                style="width: 150px; margin-top: 5rem !important; padding-top: 15rem !important;"
+                                class="pb-0 mb-0 p-5 m-5 border border-primary bg-warning"
+                            >
+                                <h4
+                                    class="mb-0 pb-0 text-center align-text-bottom text-dark"
+                                >
+                                    <field name="total_cassette_bills" />
+                                </h4>
+                            </div>
+                            <div
+                                attrs="{'invisible': [('state_cassette_bills', '!=', 'low')]}"
+                                style="width: 150px; margin-top: 15rem !important; padding-top: 5rem !important;"
+                                class="pb-0 mb-0 p-5 m-5 border border-primary bg-warning"
+                            >
+                                <h4
+                                    class="mb-0 pb-0 text-center align-text-bottom text-dark"
+                                >
+                                    <field name="total_cassette_bills" />
+                                </h4>
+                            </div>
+                            <div
+                                attrs="{'invisible': [('state_cassette_bills', '!=', 'full')]}"
+                                style="width: 150px; margin-top: 0rem !important; padding-top: 20rem !important;"
+                                class="pb-0 mb-0 p-5 m-5 border border-primary bg-danger"
+                            >
+                                <h4
+                                    class="mb-0 pb-0 text-center align-text-bottom text-white"
+                                >
+                                    <field name="total_cassette_bills" />
+                                </h4>
+                            </div>
+                            <div
+                                attrs="{'invisible': [('state_cassette_bills', '!=', 'empty')]}"
+                                style="width: 150px; margin-top: 20rem !important; padding-top: 0rem !important;"
+                                class="pb-0 mb-0 p-5 m-5 border border-primary bg-danger"
+                            >
+                                <h4
+                                    class="mb-0 pb-0 text-center align-text-bottom text-white"
+                                >
+                                    <field name="total_cassette_bills" />
+                                </h4>
+                            </div>
+                        </group>
+                    </group>
+                    <group string="Coins">
+                        <group>
+                            <field name="total_cassette_coins" />
+                            <field
+                                name="state_cassette_coins"
+                                widget="badge"
+                                decoration-success="state_cassette_coins == 'normal'"
+                                decoration-warning="state_cassette_coins in ['low', 'high']"
+                                decoration-danger="state_cassette_coins in ['empty', 'full']"
+                            />
+                            <label for="cassette_coin_2_00" string="2.00 x " />
+                            <div class="o_row">
+                                <field name="cassette_coin_2_00" />
+                            </div>
+                            <label for="cassette_coin_1_00" string="1.00 x " />
+                            <div class="o_row">
+                                <field name="cassette_coin_1_00" />
+                            </div>
+                            <label for="cassette_coin_0_50" string="0.50 x " />
+                            <div class="o_row">
+                                <field name="cassette_coin_0_50" />
+                            </div>
+                            <label for="cassette_coin_0_25" string="0.25 x " />
+                            <div class="o_row">
+                                <field name="cassette_coin_0_25" />
+                            </div>
+                            <label for="cassette_coin_0_20" string="0.20 x " />
+                            <div class="o_row">
+                                <field name="cassette_coin_0_20" />
+                            </div>
+                            <label for="cassette_coin_0_10" string="0.10 x " />
+                            <div class="o_row">
+                                <field name="cassette_coin_0_10" />
+                            </div>
+                            <label for="cassette_coin_0_05" string="0.05 x " />
+                            <div class="o_row">
+                                <field name="cassette_coin_0_05" />
+                            </div>
+                            <label for="cassette_coin_0_02" string="0.02 x " />
+                            <div class="o_row">
+                                <field name="cassette_coin_0_02" />
+                            </div>
+                            <label for="cassette_coin_0_01" string="0.01 x " />
+                            <div class="o_row">
+                                <field name="cassette_coin_0_01" />
+                            </div>
+                        </group>
+                        <group>
+                            <div
+                                attrs="{'invisible': [('state_cassette_coins', '!=', 'normal')]}"
+                                style="width: 150px; margin-top: 10rem !important; padding-top: 10rem !important;"
+                                class="pb-0 mb-0 p-5 m-5 border border-primary bg-success"
+                            >
+                                <h4
+                                    class="mb-0 pb-0 text-center align-text-bottom text-white"
+                                >
+                                    <field name="total_cassette_coins" />
+                                </h4>
+                            </div>
+                            <div
+                                attrs="{'invisible': [('state_cassette_coins', '!=', 'high')]}"
+                                style="width: 150px; margin-top: 5rem !important; padding-top: 15rem !important;"
+                                class="pb-0 mb-0 p-5 m-5 border border-primary bg-warning"
+                            >
+                                <h4
+                                    class="mb-0 pb-0 text-center align-text-bottom text-dark"
+                                >
+                                    <field name="total_cassette_coins" />
+                                </h4>
+                            </div>
+                            <div
+                                attrs="{'invisible': [('state_cassette_coins', '!=', 'low')]}"
+                                style="width: 150px; margin-top: 15rem !important; padding-top: 5rem !important;"
+                                class="pb-0 mb-0 p-5 m-5 border border-primary bg-warning"
+                            >
+                                <h4
+                                    class="mb-0 pb-0 text-center align-text-bottom text-dark"
+                                >
+                                    <field name="total_cassette_coins" />
+                                </h4>
+                            </div>
+                            <div
+                                attrs="{'invisible': [('state_cassette_coins', '!=', 'full')]}"
+                                style="width: 150px; margin-top: 0rem !important; padding-top: 20rem !important;"
+                                class="pb-0 mb-0 p-5 m-5 border border-primary bg-danger"
+                            >
+                                <h4
+                                    class="mb-0 pb-0 text-center align-text-bottom text-white"
+                                >
+                                    <field name="total_cassette_coins" />
+                                </h4>
+                            </div>
+                            <div
+                                attrs="{'invisible': [('state_cassette_coins', '!=', 'empty')]}"
+                                style="width: 150px; margin-top: 20rem !important; padding-top: 0rem !important;"
+                                class="pb-0 mb-0 p-5 m-5 border border-primary bg-danger"
+                            >
+                                <h4
+                                    class="mb-0 pb-0 text-center align-text-bottom text-white"
+                                >
+                                    <field name="total_cassette_coins" />
+                                </h4>
+                            </div>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="glory_transaction_tree_view" model="ir.ui.view">
+        <field name="name">glory.transaction.tree.view</field>
+        <field name="model">glory.transaction</field>
+        <field name="arch" type="xml">
+            <tree create="0" edit="0">
+                <field name="session_id" />
+                <field name="config_id" />
+                <field name="company_id" groups="base.group_multi_company" />
+                <field name="datetime" />
+                <field name="payment_method_id" />
+                <field name="employee_id" />
+                <field name="machine_state" />
+                <field name="operation" />
+                <field name="payment_amount" />
+                <field name="amount" sum="Amount" />
+                <field name="rest_amount" invisible="1"/>
+                <field name="total_coins" invisible="1"/>
+                <field name="total_bills" invisible="1"/>
+                <field name="start_balance" />
+                <field name="end_balance" />
+                <field name="is_completed" invisible="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="glory_transaction_tree_no_session_view" model="ir.ui.view">
+        <field name="name">glory.transaction.tree.no.session.view</field>
+        <field name="model">glory.transaction</field>
+        <field
+            name="inherit_id"
+            ref="pos_glory_connector.glory_transaction_tree_view"
+        />
+        <field name="arch" type="xml">
+            <xpath expr="//tree/field[@name='session_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="glory_transaction_search_view" model="ir.ui.view">
+        <field name="name">glory.transaction.search.view</field>
+        <field name="model">glory.transaction</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="session_id" />
+                <field name="config_id" />
+                <field name="company_id" />
+                <field name="payment_method_id" />
+                <field name="employee_id" />
+                <separator />
+                <filter
+                    string="Cashin Cancel Request"
+                    name="cashin_cancel_request"
+                    domain="[('operation', '=', 'cashin_cancel_request')]"
+                />
+                <filter
+                    string="Start Cashin Request"
+                    name="start_cashin_request"
+                    domain="[('operation', '=', 'start_cashin_request')]"
+                />
+                <filter
+                    string="End Cashin Request"
+                    name="end_cashin_request"
+                    domain="[('operation', '=', 'end_cashin_request')]"
+                />
+                <filter
+                    string="Cashout Request"
+                    name="cashout_request"
+                    domain="[('operation', '=', 'cashout_request')]"
+                />
+                <filter
+                    string="Exchange Request"
+                    name="exchange_request"
+                    domain="[('operation', '=', 'exchange_request')]"
+                />
+                <filter
+                    string="Collect All Request"
+                    name="collect_all_request"
+                    domain="[('operation', '=', 'collect_all_request')]"
+                />
+                <filter
+                    string="Collect Surplus Request"
+                    name="collect_surplus_request"
+                    domain="[('operation', '=', 'collect_surplus_request')]"
+                />
+                <filter
+                    string="Inventory Request"
+                    name="inventory_request"
+                    domain="[('operation', '=', 'inventory_request')]"
+                />
+                <filter
+                    string="Lock Bill Unit Request"
+                    name="lock_bill_unit_request"
+                    domain="[('operation', '=', 'lock_bill_unit_request')]"
+                />
+                <filter
+                    string="Unlock Bill Unit Request"
+                    name="unlock_bill_unit_request"
+                    domain="[('operation', '=', 'unlock_bill_unit_request')]"
+                />
+                <filter
+                    string="Lock Coin Unit Request"
+                    name="lock_coin_unit_request"
+                    domain="[('operation', '=', 'lock_coin_unit_request')]"
+                />
+                <filter
+                    string="Unlock Coin Unit Request"
+                    name="unlock_coin_unit_request"
+                    domain="[('operation', '=', 'unlock_coin_unit_request')]"
+                />
+                <filter
+                    string="Payment Request"
+                    name="payment_request"
+                    domain="[('operation', '=', 'payment_request')]"
+                />
+                <filter
+                    string="Aborted Payment Request"
+                    name="aborted_payment_request"
+                    domain="[('operation', '=', 'aborted_payment_request')]"
+                />
+                <filter
+                    string="Refund Payment Request"
+                    name="refund_payment_request"
+                    domain="[('operation', '=', 'refund_payment_request')]"
+                />
+                <filter
+                    string="Reboot Request"
+                    name="reboot_request"
+                    domain="[('operation', '=', 'reboot_request')]"
+                />
+                <filter
+                    string="Reset Request"
+                    name="reset_request"
+                    domain="[('operation', '=', 'reset_request')]"
+                />
+                <filter
+                    string="Shutdown Request"
+                    name="shutdown_request"
+                    domain="[('operation', '=', 'shutdown_request')]"
+                />
+                <filter
+                    string="Status Request"
+                    name="status_request"
+                    domain="[('operation', '=', 'status_request')]"
+                />
+                <separator />
+                <filter
+                    string="Today"
+                    name="datetime_today_filter"
+                    domain="[
+                        ('datetime', '&gt;=', time.strftime('%Y-%m-%d 00:00:00')),
+                        ('datetime', '&lt;=', time.strftime('%Y-%m-%d 23:59:59')),
+                    ]"
+                />
+                <filter
+                    string="Week"
+                    name="datetime_week_filter"
+                    domain="[
+                        ('datetime', '&gt;=', (context_today() - datetime.timedelta(days=7)).strftime('%Y-%m-%d 00:00:00')),
+                        ('datetime', '&lt;=', time.strftime('%Y-%m-%d 23:59:59')),
+                    ]"
+                />
+                <filter string="Date" name="datetime_filter" date="datetime" />
+                <group expand="0" string="Group By">
+                    <filter
+                        string="Session"
+                        name="session"
+                        domain="[]"
+                        context="{'group_by': 'session_id'}"
+                    />
+                    <filter
+                        string="Point of Sale"
+                        name="config"
+                        domain="[]"
+                        context="{'group_by': 'config_id'}"
+                    />
+                    <filter
+                        string="Company"
+                        name="company"
+                        domain="[]"
+                        context="{'group_by': 'company_id'}"
+                    />
+                    <filter
+                        string="Payment Method"
+                        name="payment_method"
+                        domain="[]"
+                        context="{'group_by': 'payment_method_id'}"
+                    />
+                    <filter
+                        string="Employee"
+                        name="employee"
+                        domain="[]"
+                        context="{'group_by': 'employee_id'}"
+                    />
+                    <filter
+                        string="Date"
+                        name="datetime"
+                        domain="[]"
+                        context="{'group_by': 'datetime'}"
+                    />
+                    <filter
+                        string="Operation"
+                        name="operation"
+                        domain="[]"
+                        context="{'group_by': 'operation'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_glory_transaction" model="ir.actions.act_window">
+        <field name="name">Glory Transactions</field>
+        <field name="res_model">glory.transaction</field>
+        <field name="view_mode">tree,pivot,graph,form</field>
+    </record>
+
+    <menuitem
+        id="menu_glory_transaction"
+        parent="point_of_sale.menu_point_of_sale"
+        action="pos_glory_connector.action_glory_transaction"
+        sequence="99"
+        groups="pos_glory_connector.group_pos_glory_connector_category_manager"
+    />
+
+</odoo>

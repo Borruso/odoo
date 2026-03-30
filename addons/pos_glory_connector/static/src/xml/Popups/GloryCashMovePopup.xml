@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates id="template" xml:space="preserve">
+
+    <t
+        t-name="GloryCashMovePopup"
+        t-inherit="point_of_sale.CashMovePopup"
+        t-inherit-mode="extension"
+        owl="1"
+    >
+        <xpath expr="//main" position="inside">
+            <div class="row money-details-info" t-if="env.pos.config.enable_glory">
+                <div class="col-3 offset-1" style="max-height: 350px;">
+                    <!-- Link lib Chart.js -->
+                    <script
+                        type="text/javascript"
+                        src="https://cdn.jsdelivr.net/npm/chart.js"
+                    />
+                    <!-- Canvas chart -->
+                    <canvas
+                        id="chartMoneyDetails"
+                        width="700"
+                        height="350"
+                        style="display: inline;"
+                    />
+                </div>
+            </div>
+        </xpath>
+        <xpath expr="//main//input[@name='amount']" position="attributes">
+            <attribute name="t-att-readonly">env.pos.config.enable_glory</attribute>
+        </xpath>
+        <xpath expr="//main//textarea[@name='reason']" position="attributes">
+            <attribute
+                name="t-if"
+            >env.pos.config.enable_glory and ((state.inputType == 'in' and env.pos.cashier.allow_see_cash_move_in_reason) or (state.inputType == 'out' and env.pos.cashier.allow_see_cash_move_out_reason))</attribute>
+            <attribute
+                name="t-att-readonly"
+            >env.pos.config.enable_glory and state.sendCashoutRequest</attribute>
+        </xpath>
+        <xpath
+            expr="//footer[hasclass('cash-move')]/div[hasclass('cancel')]"
+            position="before"
+        >
+            <div
+                t-if="state.inputType == 'out' and state.inputReason and state.showCashoutRequest and env.pos.config.enable_glory and env.pos.cashier.allow_cashout_operation"
+                class="button send_start_cashout_request dynamic-size"
+                t-on-click="sendStartCashoutRequest"
+            >
+                Glory Cashout Request
+            </div>
+            <div
+                t-if="state.inputType == 'in' and state.showEndCashinRequest and env.pos.config.enable_glory and env.pos.cashier.allow_cashin_operation"
+                class="button send_end_cashin_request dynamic-size"
+                t-on-click="sendEndCashinRequest"
+            >
+                Glory End Cashin Request
+            </div>
+        </xpath>
+        <xpath
+            expr="//footer[hasclass('cash-move')]/div[hasclass('confirm')]"
+            position="attributes"
+        >
+            <attribute name="t-if">state.parsedAmount</attribute>
+        </xpath>
+    </t>
+
+</templates>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="GloryOperationExchangePopup" owl="1">
+        <div class="modal-dialog">
+            <div class="popup glory-money-details">
+                <main class="body glory-money-details-body">
+                    <div class="amount-section">
+                        <strong>Exchange Amount </strong>
+                        <CurrencyAmount
+                            currency="currency"
+                            amount="env.pos.format_currency_no_symbol(state.exchangeAmount)"
+                        />
+                    </div>
+                    <div class="row money-details-info">
+                        <div class="col-3 offset-1" style="max-height: 350px;">
+                            <!-- Link lib Chart.js -->
+                            <script
+                                type="text/javascript"
+                                src="https://cdn.jsdelivr.net/npm/chart.js"
+                            />
+                            <!-- Canvas chart -->
+                            <canvas
+                                id="chartMoneyDetails"
+                                width="700"
+                                height="350"
+                                style="display: inline;"
+                            />
+                        </div>
+                    </div>
+                </main>
+                <div class="footer">
+                    <t t-if="state.showCashoutRequest">
+                        <div
+                            t-if="env.pos.config.enable_glory and env.pos.cashier.allow_exchange_operation"
+                            class="button send_cashout_request dynamic-size"
+                            t-on-click="sendCashoutRequest"
+                        >
+                            Glory Cashout Request
+                        </div>
+                    </t>
+                    <t t-else="">
+                        <div
+                            t-if="state.showStartCashinRequest and env.pos.config.enable_glory and env.pos.cashier.allow_exchange_operation"
+                            class="button send_start_cashin_request dynamic-size"
+                            t-on-click="sendStartCashinRequest"
+                        >
+                            Glory Start Cashin Request
+                        </div>
+                        <div
+                            t-if="state.showEndCashinRequest and env.pos.config.enable_glory and env.pos.cashier.allow_exchange_operation"
+                            class="button send_end_cashin_request dynamic-size"
+                            t-on-click="sendEndCashinRequest"
+                        >
+                            Glory End Cashin Request
+                        </div>
+                    </t>
+                    <div class="button cancel" t-on-click="cancel">
+                        <t t-esc="props.cancelText" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+
+</templates>

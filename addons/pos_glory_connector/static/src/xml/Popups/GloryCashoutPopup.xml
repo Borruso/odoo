@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="GloryCashoutPopup" owl="1">
+        <div class="popup money-details glory-money-details">
+            <main class="body glory-money-details-body">
+                <div class="money-details-title">
+                    Coins/Bills
+                </div>
+                <div t-if="env.pos.exchangeAmount" class="exchange-amount-section">
+                    <strong>Exchange Amount </strong>
+                    <CurrencyAmount
+                        currency="env.pos.currency"
+                        amount="env.pos.format_currency_no_symbol(env.pos.exchangeAmount)"
+                    />
+                </div>
+                <div class="row col-12" style="max-height: 280px;">
+                    <!-- Link lib Chart.js -->
+                    <script
+                        type="text/javascript"
+                        src="https://cdn.jsdelivr.net/npm/chart.js"
+                    />
+                    <!-- Canvas chart -->
+                    <canvas
+                        id="chartMoneyDetails"
+                        width="700"
+                        height="350"
+                        style="display: inline;"
+                    />
+                </div>
+                <div class="row money-details-info money-details-info-cashout">
+                    <div
+                        t-foreach="[firstHalfMoneyDetails, lastHalfMoneyDetails]"
+                        t-as="moneyDetailsList"
+                        t-key="moneyDetailsList_index"
+                        class="col-4 small"
+                    >
+                        <t
+                            t-foreach="moneyDetailsList"
+                            t-as="moneyValue"
+                            t-key="moneyValue"
+                        >
+                            <div
+                                class="money-details-value"
+                                t-on-input="updateMoneyDetailsAmount"
+                            >
+                                <input
+                                    class="pos-input"
+                                    t-att-id="moneyValue"
+                                    type="number"
+                                    t-model.number="state.moneyDetails[moneyValue]"
+                                />
+                                <span
+                                    class="glory-money-inventory"
+                                    t-esc="state.moneyInventoryDetails[moneyValue]"
+                                />
+                                <t t-if="(moneyValue * 1) >= 5">
+                                    <CurrencyAmount
+                                        forTarget="moneyValue"
+                                        currency="currency"
+                                        amount="moneyValue"
+                                    />
+                                </t>
+                                <t t-else="">
+                                    <CurrencyAmount
+                                        forTarget="moneyValue"
+                                        currency="currency"
+                                        amount="env.pos.format_currency_no_symbol(moneyValue * 1)"
+                                    />
+                                </t>
+                            </div>
+                        </t>
+                    </div>
+                    <div class="col-3 offset-1">
+                        <div
+                            t-if="env.pos.cashier.allow_see_inventory_total"
+                            class="total-section total-section-cashout"
+                        >
+                            <span>Total </span>
+                            <CurrencyAmount
+                                currency="currency"
+                                amount="env.pos.format_currency_no_symbol(state.total)"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </main>
+            <footer class="footer glory-money-details-footer">
+                <div class="button confirm" t-on-click="confirm">
+                    <t t-esc="props.confirmText" />
+                </div>
+                <div
+                    t-if="!env.pos.exchangeAmount"
+                    class="button cancel"
+                    t-on-click="cancel"
+                >
+                    <t t-esc="props.cancelText" />
+                </div>
+            </footer>
+        </div>
+    </t>
+
+</templates>

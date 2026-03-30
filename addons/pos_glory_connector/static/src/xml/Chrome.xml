@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates id="template" xml:space="preserve">
+
+    <t
+        t-name="GloryChrome"
+        t-inherit="point_of_sale.Chrome"
+        t-inherit-mode="extension"
+        owl="1"
+    >
+        <xpath expr="//div[hasclass('status-buttons')]" position="inside">
+            <!-- Link lib Chart.js -->
+            <script
+                type="text/javascript"
+                src="https://cdn.jsdelivr.net/npm/chart.js"
+            />
+            <t
+                t-set="showGloryAlertMoneyButton"
+                t-value="showGloryAlertMoneyButton()"
+            />
+            <t
+                t-set="checkFirstGloryTransaction"
+                t-value="checkFirstGloryTransaction()"
+            />
+            <GloryOperationButton t-if="env.pos.config.enable_glory" />
+            <GloryAlertMoneyButton
+                t-if="env.pos.config.enable_glory and env.pos.pos_session.checkGloryAlertMoney"
+            />
+        </xpath>
+    </t>
+
+</templates>

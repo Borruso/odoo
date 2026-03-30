@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+
+    <record id="mail_template_glory_transaction_state_cassette" model="mail.template">
+        <field name="name">Glory Transaction: State Cassette</field>
+        <field name="model_id" ref="pos_glory_connector.model_glory_transaction_mail" />
+        <field name="subject">Check State Cassette</field>
+        <field
+            name="description"
+        >Set this template to automate emails when state cassette is to be checked</field>
+        <field name="body_html" type="html">
+            <div>
+                Dear PoS Manager,<br /><br />
+                The machine <t
+                    t-out="object.sudo().config_id.name or ''"
+                >Roma (Via Piazza Trevi 98)</t>
+                indicates that one or more recyclers are high or full.
+                <br />
+                State Cassette Coins: <t
+                    t-out="object.sudo().state_cassette_coins or ''"
+                >High</t>
+                <br />
+                State Cassette Bills: <t
+                    t-out="object.sudo().state_cassette_bills or ''"
+                >High</t>
+                <br /> <br />
+                <strong>Recyclers:</strong> <br />
+                <table class="table table-sm" style="width: 50%">
+                    <thead>
+                        <tr>
+                            <th />
+                            <th class="text-end">Pieces</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>0.01</td>
+                            <td class="text-end">
+                                <span t-out="object.sudo().coin_0_01 or ''">300</span>
+                            </td>
+                            <td>
+                                <span
+                                    t-out="object.sudo().state_coin_0_01 or ''"
+                                >High</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>0.02</td>
+                            <td class="text-end">
+                                <span t-out="object.sudo().coin_0_02 or ''">300</span>
+                            </td>
+                            <td>
+                                <span
+                                    t-out="object.sudo().state_coin_0_02 or ''"
+                                >High</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>0.05</td>
+                            <td class="text-end">
+                                <span t-out="object.sudo().coin_0_05 or ''">300</span>
+                            </td>
+                            <td>
+                                <span
+                                    t-out="object.sudo().state_coin_0_05 or ''"
+                                >High</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>0.10</td>
+                            <td class="text-end">
+                                <span t-out="object.sudo().coin_0_10 or ''">300</span>
+                            </td>
+                            <td>
+                                <span
+                                    t-out="object.sudo().state_coin_0_10 or ''"
+                                >High</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>0.20</td>
+                            <td class="text-end">
+                                <span t-out="object.sudo().coin_0_20 or ''">300</span>
+                            </td>
+                            <td>
+                                <span
+                                    t-out="object.sudo().state_coin_0_20 or ''"
+                                >High</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>0.25</td>
+                            <td class="text-end">
+                                <span t-out="object.sudo().coin_0_25 or ''">300</span>
+                            </td>
+                            <td>
+                                <span
+                                    t-out="object.sudo().state_coin_0_25 or ''"
+                                >High</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>0.50</td>
+                            <td class="text-end">
+                                <span t-out="object.sudo().coin_0_50 or ''">300</span>
+                            </td>
+                            <td>
+                                <span
+                                    t-out="object.sudo().state_coin_0_50 or ''"
+                                >High</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>1.00</td>
+                            <td class="text-end">
+                                <span t-out="object.sudo().coin_1_00 or ''">300</span>
+                            </td>
+                            <td>
+                                <span
+                                    t-out="object.sudo().state_coin_1_00 or ''"
+                                >High</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2.00</td>
+                            <td class="text-end">
+                                <span t-out="object.sudo().coin_2_00 or ''">300</span>
+                            </td>
+                            <td>
+                                <span
+                                    t-out="object.sudo().state_coin_2_00 or ''"
+                                >High</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>5.00</td>
+                            <td class="text-end">
+                                <span t-out="object.sudo().bill_5_00 or ''">300</span>
+                            </td>
+                            <td>
+                                <span
+                                    t-out="object.sudo().state_bill_5_00 or ''"
+                                >High</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>10.00</td>
+                            <td class="text-end">
+                                <span t-out="object.sudo().bill_10_00 or ''">300</span>
+                            </td>
+                            <td>
+                                <span
+                                    t-out="object.sudo().state_bill_10_00 or ''"
+                                >High</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>20.00</td>
+                            <td class="text-end">
+                                <span t-out="object.sudo().bill_20_00 or ''">300</span>
+                            </td>
+                            <td>
+                                <span
+                                    t-out="object.sudo().state_bill_20_00 or ''"
+                                >High</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <br /><br />
+                Kind regards.
+            </div>
+        </field>
+        <field name="lang">{{ user.lang }}</field>
+        <field name="auto_delete" eval="False" />
+    </record>
+
+    <record id="mail_template_glory_transaction_state_stacker" model="mail.template">
+        <field name="name">Glory Transaction: State Stacker</field>
+        <field name="model_id" ref="pos_glory_connector.model_glory_transaction_mail" />
+        <field name="subject">Check State Stacker</field>
+        <field
+            name="description"
+        >Set this template to automate emails when state stacker is to be checked</field>
+        <field name="body_html" type="html">
+            <div>
+                Dear PoS Manager,<br /><br />
+                The machine <t
+                    t-out="object.sudo().config_id.name or ''"
+                >Roma (Via Piazza Trevi 98)</t>
+                indicates that one or more recyclers are low or empty.
+                <br /> <br />
+                <strong>Recyclers:</strong> <br />
+                <table class="table table-sm" style="width: 50%">
+                    <thead>
+                        <tr>
+                            <th />
+                            <th class="text-end">Pieces</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>0.01</td>
+                            <td class="text-end">
+                                <span t-out="object.sudo().coin_0_01 or ''">10</span>
+                            </td>
+                            <td>
+                                <span
+                                    t-out="object.sudo().state_coin_0_01 or ''"
+                                >Low</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>0.02</td>
+                            <td class="text-end">
+                                <span t-out="object.sudo().coin_0_02 or ''">10</span>
+                            </td>
+                            <td>
+                                <span
+                                    t-out="object.sudo().state_coin_0_02 or ''"
+                                >Low</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>0.05</td>
+                            <td class="text-end">
+                                <span t-out="object.sudo().coin_0_05 or ''">10</span>
+                            </td>
+                            <td>
+                                <span
+                                    t-out="object.sudo().state_coin_0_05 or ''"
+                                >Low</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>0.10</td>
+                            <td class="text-end">
+                                <span t-out="object.sudo().coin_0_10 or ''">10</span>
+                            </td>
+                            <td>
+                                <span
+                                    t-out="object.sudo().state_coin_0_10 or ''"
+                                >Low</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>0.20</td>
+                            <td class="text-end">
+                                <span t-out="object.sudo().coin_0_20 or ''">10</span>
+                            </td>
+                            <td>
+                                <span
+                                    t-out="object.sudo().state_coin_0_20 or ''"
+                                >Low</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>0.25</td>
+                            <td class="text-end">
+                                <span t-out="object.sudo().coin_0_25 or ''">10</span>
+                            </td>
+                            <td>
+                                <span
+                                    t-out="object.sudo().state_coin_0_25 or ''"
+                                >Low</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>0.50</td>
+                            <td class="text-end">
+                                <span t-out="object.sudo().coin_0_50 or ''">10</span>
+                            </td>
+                            <td>
+                                <span
+                                    t-out="object.sudo().state_coin_0_50 or ''"
+                                >Low</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>1.00</td>
+                            <td class="text-end">
+                                <span t-out="object.sudo().coin_1_00 or ''">10</span>
+                            </td>
+                            <td>
+                                <span
+                                    t-out="object.sudo().state_coin_1_00 or ''"
+                                >Low</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2.00</td>
+                            <td class="text-end">
+                                <span t-out="object.sudo().coin_2_00 or ''">10</span>
+                            </td>
+                            <td>
+                                <span
+                                    t-out="object.sudo().state_coin_2_00 or ''"
+                                >Low</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>5.00</td>
+                            <td class="text-end">
+                                <span t-out="object.sudo().bill_5_00 or ''">10</span>
+                            </td>
+                            <td>
+                                <span
+                                    t-out="object.sudo().state_bill_5_00 or ''"
+                                >Low</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>10.00</td>
+                            <td class="text-end">
+                                <span t-out="object.sudo().bill_10_00 or ''">10</span>
+                            </td>
+                            <td>
+                                <span
+                                    t-out="object.sudo().state_bill_10_00 or ''"
+                                >Low</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>20.00</td>
+                            <td class="text-end">
+                                <span t-out="object.sudo().bill_20_00 or ''">10</span>
+                            </td>
+                            <td>
+                                <span
+                                    t-out="object.sudo().state_bill_20_00 or ''"
+                                >Low</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <br /><br />
+                Kind regards.
+            </div>
+        </field>
+        <field name="lang">{{ user.lang }}</field>
+        <field name="auto_delete" eval="False" />
+    </record>
+
+</odoo>

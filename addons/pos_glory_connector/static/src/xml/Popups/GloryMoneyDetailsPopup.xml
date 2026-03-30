@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates id="template" xml:space="preserve">
+
+    <t
+        t-name="GloryMoneyDetailsPopup"
+        t-inherit="point_of_sale.MoneyDetailsPopup"
+        t-inherit-mode="extension"
+        owl="1"
+    >
+        <xpath expr="//div[hasclass('money-details')]" position="attributes">
+            <attribute name="style">max-height: 500px;width: 500px;</attribute>
+        </xpath>
+        <xpath expr="//main" position="attributes">
+            <attribute name="style">max-height: 400px;</attribute>
+        </xpath>
+        <xpath expr="//div[hasclass('money-details-info')]" position="attributes">
+            <attribute name="style">max-height: 300px;</attribute>
+        </xpath>
+        <xpath expr="//div[hasclass('money-details-value')]//input" position="before">
+            <t
+                t-if="state.moneyStatus[moneyValue] == '0' and env.pos.config.enable_glory and state.showStatusGlory"
+            >
+                <span style="color:red;display:inline-block;width:84px">
+                    <span><i class="fa fa-fw fa-warning" /></span>
+                    <span>empty</span>
+                </span>
+            </t>
+            <t
+                t-elif="state.moneyStatusOdoo[moneyValue] == '0' and env.pos.config.enable_glory and !state.showStatusGlory"
+            >
+                <span style="color:red;display:inline-block;width:84px">
+                    <span><i class="fa fa-fw fa-warning" /></span>
+                    <span>empty</span>
+                </span>
+            </t>
+            <t
+                t-elif="state.moneyStatus[moneyValue] == '1' and env.pos.config.enable_glory and state.showStatusGlory"
+            >
+                <span style="color:orange;display:inline-block;width:84px">
+                    <span><i class="fa fa-fw fa-warning" /></span>
+                    <span>low</span>
+                </span>
+            </t>
+            <t
+                t-elif="state.moneyStatusOdoo[moneyValue] == '1' and env.pos.config.enable_glory and !state.showStatusGlory"
+            >
+                <span style="color:orange;display:inline-block;width:84px">
+                    <span><i class="fa fa-fw fa-warning" /></span>
+                    <span>low</span>
+                </span>
+            </t>
+            <t
+                t-elif="state.moneyStatus[moneyValue] == '3' and env.pos.config.enable_glory and state.showStatusGlory"
+            >
+                <span style="color:gray;display:inline-block;width:84px">
+                    <span><i class="fa fa-fw fa-warning" /></span>
+                    <span>high</span>
+                </span>
+            </t>
+            <t
+                t-elif="state.moneyStatus[moneyValue] == '4' and env.pos.config.enable_glory and state.showStatusGlory"
+            >
+                <span style="color:black;display:inline-block;width:84px">
+                    <span><i class="fa fa-fw fa-warning" /></span>
+                    <span>full</span>
+                </span>
+            </t>
+            <t t-else="">
+                <span style="display:inline-block;width:84px" />
+            </t>
+        </xpath>
+        <xpath expr="//div[hasclass('total-section')]" position="attributes">
+            <attribute name="t-if">allowSeeTotalSection</attribute>
+        </xpath>
+        <xpath expr="//footer" position="inside">
+            <div
+                class="button button-show-glory-status"
+                t-on-click="onClickShowStatusGlory"
+                t-if="!state.showStatusGlory and env.pos.config.enable_glory"
+            >
+                Show Glory Status
+            </div>
+            <div
+                class="button button-show-glory-status"
+                t-on-click="onClickHideStatusGlory"
+                t-if="state.showStatusGlory and env.pos.config.enable_glory"
+            >
+                Hide Glory Status
+            </div>
+        </xpath>
+    </t>
+
+</templates>

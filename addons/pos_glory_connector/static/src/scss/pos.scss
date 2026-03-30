@@ -1,0 +1,262 @@
+.glory-button {
+    width: 30px !important;
+}
+
+.glory-button-danger {
+    color: #dc3545 !important;
+}
+
+.glory-money-details {
+    max-width: 900px !important;
+    width: 100% !important;
+    max-height: 85% !important;
+    font-size: smaller !important;
+}
+@include media-breakpoint-down(md) {
+    .glory-money-details {
+        max-width: 90% !important;
+    }
+}
+
+.glory-money-details-body {
+    max-height: 500px !important;
+}
+@include media-breakpoint-down(md) {
+    .glory-money-details-body {
+        max-height: 350px !important;
+
+        .money-details-title {
+            margin-bottom: 0 !important;
+        }
+    }
+}
+@include media-breakpoint-down(md) {
+    .glory-money-details-footer {
+        height: 120px !important;
+        border-top: 0 !important;
+
+        .button {
+            width: 100px !important;
+            margin-top: 60px !important;
+        }
+    }
+}
+@include media-breakpoint-only(xl) {
+    .glory-money-details-footer {
+        height: 90px !important;
+        border-top: 0 !important;
+    }
+}
+
+.money-details-info {
+    margin-top: 20px !important;
+    justify-content: space-around !important;
+}
+@include media-breakpoint-down(md) {
+    .money-details-info {
+        margin-top: 0 !important;
+        font-size: small !important;
+
+        .pos-input {
+            font-size: small !important;
+            width: 30px !important;
+            margin-right: 5px !important;
+        }
+    }
+}
+.money-details-info-collect {
+    width: 450px !important;
+}
+@include media-breakpoint-only(xl) {
+    .money-details-info-cashout {
+        margin-top: 0 !important;
+    }
+}
+@include media-breakpoint-down(md) {
+    .money-details-value {
+        margin: 1px 0 !important;
+    }
+}
+@include media-breakpoint-only(xl) {
+    .money-details-value {
+        margin: 1px 0 !important;
+    }
+}
+
+.money-details-value-status {
+    display: inline-block !important;
+    width: 84px !important;
+}
+@include media-breakpoint-down(md) {
+    .money-details-value-status {
+        max-width: 40px !important;
+    }
+}
+
+.money-details-value-status-danger {
+    color: red !important;
+}
+
+.money-details-value-status-warning {
+    color: orange !important;
+}
+
+.money-details-value-status-info {
+    color: gray !important;
+}
+
+.money-details-value-status-dark {
+    color: black !important;
+}
+
+@include media-breakpoint-down(md) {
+    .total-section {
+        font-size: smaller !important;
+    }
+}
+@include media-breakpoint-only(xl) {
+    .total-section-cashout {
+        font-size: medium !important;
+    }
+}
+
+.glory-popup-text {
+    padding: 15px !important;
+    display: inline-block !important;
+    vertical-align: middle !important;
+}
+@include media-breakpoint-down(md) {
+    .glory-popup-text {
+        max-width: 400px !important;
+        width: 90% !important;
+        font-size: 12px !important;
+    }
+}
+@include media-breakpoint-only(xl) {
+    .glory-popup-text {
+        font-size: medium !important;
+    }
+}
+
+.glory-popup-container {
+    display: flex !important;
+    justify-content: space-between !important;
+    padding-bottom: 10px !important;
+    padding-left: 10px !important;
+}
+@include media-breakpoint-down(md) {
+    .glory-popup-container {
+        padding-bottom: 5px !important;
+    }
+}
+@include media-breakpoint-only(xl) {
+    .glory-popup-container {
+        padding-bottom: 5px !important;
+    }
+}
+
+.glory-popup-button {
+    padding-top: 1.9em !important;
+    padding-bottom: 1.9em !important;
+    font-size: 12px !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.2px !important;
+    font-weight: 500 !important;
+    color: #000 !important;
+    background-color: #fff !important;
+    border-radius: 15px !important;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1) !important;
+    transition: all 0.3s ease 0s !important;
+    cursor: pointer !important;
+    outline: none !important;
+    width: 95% !important;
+}
+@include media-breakpoint-down(md) {
+    .glory-popup-button {
+        margin-top: 0 !important;
+        padding-top: 1em !important;
+        padding-bottom: 1em !important;
+    }
+}
+@include media-breakpoint-only(xl) {
+    .glory-popup-button {
+        margin-top: 0 !important;
+        padding-top: 1.5em !important;
+        padding-bottom: 1.5em !important;
+    }
+}
+
+.glory-popup-button-success {
+    background-color: #d4edda !important;
+    box-shadow: 0px 15px 20px rgba(212, 237, 218, 0.4) !important;
+    color: #155724 !important;
+}
+
+.glory-popup-button-warning {
+    background-color: #fff3cd !important;
+    box-shadow: 0px 15px 20px rgba(255, 243, 205, 0.4) !important;
+    color: #856404 !important;
+}
+
+.glory-popup-button-danger {
+    background-color: #f8d7da !important;
+    box-shadow: 0px 15px 20px rgba(248, 215, 218, 0.4) !important;
+    color: #721c24 !important;
+}
+
+.glory-popup-button-info {
+    background-color: #0dcaf0 !important;
+    box-shadow: 0px 15px 20px rgba(13, 202, 240, 0.4) !important;
+    color: #000 !important;
+}
+
+.glory-popup-button:hover {
+    transform: translateY(-7px) !important;
+}
+
+.glory-popup-button:active {
+    transform: translateY(-1px) !important;
+}
+
+.glory-popup-success {
+    padding: 10px !important;
+    color: #270 !important;
+    background-color: #dff2bf !important;
+}
+@include media-breakpoint-down(md) {
+    .glory-popup-success {
+        max-width: 400px !important;
+        width: 90% !important;
+    }
+}
+
+.glory-money-inventory {
+    padding-right: 10px !important;
+    width: 30px !important;
+    color: #0077f3 !important;
+}
+@include media-breakpoint-down(md) {
+    .glory-money-inventory {
+        padding-right: 0 !important;
+    }
+}
+
+.glory-money-inventory-stacker {
+    padding-right: 10px !important;
+    width: 30px !important;
+    color: #f4ba00 !important;
+}
+@include media-breakpoint-down(md) {
+    .glory-money-inventory-stacker {
+        padding-right: 0 !important;
+    }
+}
+
+.cash-move-popup {
+    top: 50% !important;
+    max-width: 800px !important;
+}
+
+.button-show-glory-status {
+    width: 150px !important;
+}

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+
+    <record id="glory_payment_method" model="pos.payment.method" forcecreate="0">
+        <field name="name">Glory Cash Machine</field>
+        <field name="is_glory_machine" eval="True" />
+    </record>
+
+    <record id="ir_action_server_action_set_glory_on_order" model="ir.actions.server">
+        <field name="name">Set Glory on Order</field>
+        <field name="model_id" ref="point_of_sale.model_pos_order"/>
+        <field name="binding_model_id" ref="point_of_sale.model_pos_order"/>
+        <field name="binding_view_types">form,tree</field>
+        <field name="groups_id" eval="[(4, ref('point_of_sale.group_pos_manager'))]" />
+        <field name="state">code</field>
+        <field name="code">
+            action = record.action_set_glory_on_order()
+        </field>
+    </record>
+
+</odoo>

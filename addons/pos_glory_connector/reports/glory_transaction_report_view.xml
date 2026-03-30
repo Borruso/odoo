@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="glory_transaction_report_pivot_view" model="ir.ui.view">
+         <field name="name">glory.transaction.report.pivot.view</field>
+         <field name="model">glory.transaction.report</field>
+         <field name="arch" type="xml">
+             <pivot sample="1">
+                 <field name="config_id" type="row" />
+                 <field name="dateday" type="col" />
+                 <field name="end_balance" type="measure" />
+             </pivot>
+         </field>
+    </record>
+
+    <record id="glory_transaction_report_tree_view" model="ir.ui.view">
+         <field name="name">glory.transaction.report.tree.view</field>
+         <field name="model">glory.transaction.report</field>
+         <field name="arch" type="xml">
+             <tree>
+                 <field name="dateday" />
+                 <field name="config_id" />
+                 <field name="start_balance" />
+                 <field name="payment" />
+                 <field name="cash_in" />
+                 <field name="cash_out" />
+                 <field name="collect" />
+                 <field name="lock_bill" />
+                 <field name="lock_coin" />
+                 <field name="end_balance" />
+                 <field name="company_id" groups="base.group_multi_company" />
+             </tree>
+         </field>
+    </record>
+
+    <record id="glory_transaction_report_search_view" model="ir.ui.view">
+        <field name="name">glory.transaction.report.search.view</field>
+        <field name="model">glory.transaction.report</field>
+        <field name="arch" type="xml">
+            <search>
+                <filter
+                    string="Today"
+                    name="dateday_today_filter"
+                    domain="[('dateday', '=', context_today().strftime('%Y-%m-%d'))]"
+                />
+                <filter
+                    string="Yesterday"
+                    name="dateday_yesterday_filter"
+                    domain="[('dateday', '=', (context_today() - datetime.timedelta(days=1)).strftime('%Y-%m-%d'))]"
+                />
+                <filter string="Date Day" name="dateday_filter" date="dateday" />
+            </search>
+        </field>
+    </record>
+
+    <record id="action_glory_transaction_report" model="ir.actions.act_window">
+        <field name="name">Glory Transaction Analysis</field>
+        <field name="res_model">glory.transaction.report</field>
+        <field name="view_mode">pivot,tree</field>
+    </record>
+
+    <menuitem
+        id="menu_glory_transaction_report"
+        parent="point_of_sale.menu_point_of_sale"
+        action="pos_glory_connector.action_glory_transaction_report"
+        sequence="99"
+        groups="pos_glory_connector.group_pos_glory_connector_category_manager"
+    />
+
+</odoo>

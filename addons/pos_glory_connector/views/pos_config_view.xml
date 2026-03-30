@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="pos_config_kanban_view_inherit" model="ir.ui.view">
+        <field name="name">pos.config.kanban.view.inherit</field>
+        <field name="model">pos.config</field>
+        <field name="inherit_id" ref="point_of_sale.view_pos_config_kanban" />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//div[hasclass('dropdown-menu')]//div[hasclass('o_kanban_manage_view')]"
+                position="inside"
+            >
+                <div
+                    role="menuitem"
+                    groups="pos_glory_connector.group_pos_glory_connector_category_manager"
+                >
+                    <a name="action_last_glory_transaction" type="object">
+                        Last Glory Transaction
+                    </a>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

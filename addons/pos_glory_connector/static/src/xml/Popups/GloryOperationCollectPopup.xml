@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="GloryOperationCollectRequestPopup" owl="1">
+        <div class="modal-dialog">
+            <div class="popup money-details money-details-info-collect">
+                <main class="body">
+                    <div
+                        class="money-details-title"
+                        style="text-align: center !important;"
+                    >
+                        <t t-esc="collectBody" />
+                    </div>
+                    <div class="money-details-info">
+                        <div
+                            t-foreach="[firstHalfMoneyDetails, lastHalfMoneyDetails]"
+                            t-as="moneyDetailsList"
+                            t-key="moneyDetailsList_index"
+                        >
+                            <t
+                                t-foreach="moneyDetailsList"
+                                t-as="moneyValue"
+                                t-key="moneyValue"
+                            >
+                                <div
+                                    class="money-details-value"
+                                    t-if="!env.pos.valueCollectSpecific and state.moneyInventoryDetails[moneyValue]"
+                                >
+                                    <span
+                                        class="glory-money-inventory"
+                                        t-esc="state.moneyInventoryDetails[moneyValue]"
+                                    />
+                                    <t t-if="(moneyValue * 1) >= 5">
+                                        <CurrencyAmount
+                                            forTarget="moneyValue"
+                                            currency="currency"
+                                            amount="moneyValue"
+                                        />
+                                    </t>
+                                    <t t-else="">
+                                        <CurrencyAmount
+                                            forTarget="moneyValue"
+                                            currency="currency"
+                                            amount="env.pos.format_currency_no_symbol(moneyValue * 1)"
+                                        />
+                                    </t>
+                                </div>
+                                <div
+                                    class="money-details-value"
+                                    t-if="env.pos.valueCollectSpecific and state.moneyInventoryDetails[moneyValue]"
+                                >
+                                    <input
+                                        class="pos-input"
+                                        t-att-id="moneyValue"
+                                        type="number"
+                                        t-model.number="state.moneySpecificDetails[moneyValue]"
+                                    />
+                                    <span
+                                        class="glory-money-inventory"
+                                        t-esc="state.moneyInventoryDetails[moneyValue]"
+                                    />
+                                    <t t-if="(moneyValue * 1) >= 5">
+                                        <CurrencyAmount
+                                            forTarget="moneyValue"
+                                            currency="currency"
+                                            amount="moneyValue"
+                                        />
+                                    </t>
+                                    <t t-else="">
+                                        <CurrencyAmount
+                                            forTarget="moneyValue"
+                                            currency="currency"
+                                            amount="env.pos.format_currency_no_symbol(moneyValue * 1)"
+                                        />
+                                    </t>
+                                </div>
+                            </t>
+                        </div>
+                    </div>
+                </main>
+                <div class="footer">
+                    <div class="button confirm" t-on-click="confirm">
+                        <t t-esc="props.confirmText" />
+                    </div>
+                    <div class="button cancel" t-on-click="cancel">
+                        <t t-esc="props.cancelText" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+
+</templates>

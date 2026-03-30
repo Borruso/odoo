@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="GloryAlertMoneyPopup" owl="1">
+        <div class="modal-dialog">
+            <div class="popup popup-text glory-popup-text">
+                <h1>Glory Machine</h1>
+                <h3>Alert Money</h3>
+                <t
+                    t-foreach="state.gloryAlertMoney"
+                    t-as="gloryAlert"
+                    t-key="gloryAlert"
+                >
+                    <p t-esc="gloryAlert" />
+                </t>
+                <div class="glory-popup-container">
+                    <div
+                        class="button glory-popup-button glory-popup-button-success dynamic-size"
+                        t-on-click="openCashMoveButton"
+                        t-if="showCashMoveButton()"
+                    >
+                        <i class="fa fa-money" aria-hidden="true" />
+                        <span style="padding-left: 10px;">Cash In/Out</span>
+                    </div>
+                    <div
+                        class="button glory-popup-button glory-popup-button-danger cancel dynamic-size"
+                        t-on-click="cancel"
+                    >
+                        <i class="fa fa-close" /> Cancel
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+
+</templates>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="GloryOperationAdministratorPopup" owl="1">
+        <div class="modal-dialog">
+            <div class="popup popup-text glory-popup-text">
+                <h1>Glory Machine</h1>
+                <p class="category">Administrator Operations</p>
+                <div class="glory-popup-container">
+                    <div
+                        class="button glory-popup-button glory-popup-button-success dynamic-size"
+                        t-on-click="openGloryOperationUnlockBillRequest"
+                        t-if="env.pos.config.enable_glory and env.pos.cashier.allow_administrator_operation"
+                    >
+                        <t t-if="env.pos.config.glory_kind == 'ci5'">
+                            <i class="fa fa-unlock" /> Unlock
+                        </t>
+                        <t t-else="">
+                            <i class="fa fa-unlock" /> Unlock Bill
+                        </t>
+                    </div>
+                    <div
+                        class="button glory-popup-button glory-popup-button-danger dynamic-size"
+                        t-on-click="openGloryOperationLockBillRequest"
+                        t-if="env.pos.config.enable_glory and env.pos.cashier.allow_administrator_operation"
+                    >
+                        <t t-if="env.pos.config.glory_kind == 'ci5'">
+                            <i class="fa fa-lock" /> Lock
+                        </t>
+                        <t t-else="">
+                            <i class="fa fa-lock" /> Lock Bill
+                        </t>
+                    </div>
+                </div>
+                <div class="glory-popup-container">
+                    <div
+                        class="button glory-popup-button glory-popup-button-success dynamic-size"
+                        t-on-click="openGloryOperationUnlockCoinRequest"
+                        t-if="env.pos.config.enable_glory and env.pos.config.glory_kind != 'ci5' and env.pos.cashier.allow_administrator_operation"
+                    >
+                        <i class="fa fa-unlock" /> Unlock Coin
+                    </div>
+                    <div
+                        class="button glory-popup-button glory-popup-button-danger dynamic-size"
+                        t-on-click="openGloryOperationLockCoinRequest"
+                        t-if="env.pos.config.enable_glory and env.pos.config.glory_kind != 'ci5' and env.pos.cashier.allow_administrator_operation"
+                    >
+                        <i class="fa fa-lock" /> Lock Coin
+                    </div>
+                </div>
+                <div class="glory-popup-container">
+                    <div
+                        class="button glory-popup-button glory-popup-button-info dynamic-size"
+                        t-on-click="openGloryOperationCollectAllRequest"
+                        t-if="env.pos.config.enable_glory and env.pos.cashier.allow_administrator_operation"
+                    >
+                        <i class="fa fa-money" /> Collect All
+                    </div>
+                    <div
+                        class="button glory-popup-button glory-popup-button-info dynamic-size"
+                        t-on-click="openGloryOperationCollectSpecificRequest"
+                        t-if="env.pos.config.enable_glory and env.pos.cashier.allow_administrator_operation"
+                    >
+                        <i class="fa fa-money" /> Collect Specific
+                    </div>
+                </div>
+                <div class="glory-popup-container">
+                    <div
+                        class="button glory-popup-button glory-popup-button-info dynamic-size"
+                        t-on-click="openGloryOperationCollectAllBillsRequest"
+                        t-if="env.pos.config.enable_glory and env.pos.cashier.allow_administrator_operation"
+                    >
+                        <i class="fa fa-money" /> Collect All Bills
+                    </div>
+                    <div
+                        class="button glory-popup-button glory-popup-button-info dynamic-size"
+                        t-on-click="openGloryOperationCollectAllCoinsRequest"
+                        t-if="env.pos.config.enable_glory and env.pos.cashier.allow_administrator_operation"
+                    >
+                        <i class="fa fa-money" /> Collect All Coins
+                    </div>
+                </div>
+                <div class="glory-popup-container">
+                    <div
+                        class="button glory-popup-button glory-popup-button-warning dynamic-size"
+                        t-on-click="openGloryOperationCollectSurplusRequest"
+                        t-if="env.pos.config.enable_glory and env.pos.cashier.allow_administrator_operation"
+                    >
+                        <i class="fa fa-money" /> Collect Surplus
+                    </div>
+                </div>
+                <div class="footer">
+                    <div
+                        class="button glory-popup-button glory-popup-button-danger cancel"
+                        t-on-click="cancel"
+                    >
+                        <i class="fa fa-close" /> Cancel
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+
+</templates>

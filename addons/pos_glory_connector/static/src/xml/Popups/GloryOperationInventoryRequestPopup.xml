@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="GloryOperationInventoryRequestPopup" owl="1">
+        <div class="modal-dialog">
+            <div class="popup money-details glory-money-details">
+                <main class="body glory-money-details-body">
+                    <div class="row money-details-info">
+                        <div
+                            t-foreach="[firstHalfMoneyDetails, lastHalfMoneyDetails]"
+                            t-as="moneyDetailsList"
+                            t-key="moneyDetailsList_index"
+                            class="col-4 small"
+                        >
+                            <t
+                                t-foreach="moneyDetailsList"
+                                t-as="moneyValue"
+                                t-key="moneyValue"
+                            >
+                                <div class="money-details-value">
+                                    <t
+                                        t-if="state.moneyStatus[moneyValue] == '0' and env.pos.config.enable_glory and state.showStatusGlory"
+                                    >
+                                        <span
+                                            class="money-details-value-status money-details-value-status-danger"
+                                        >
+                                            <span>
+                                                <i class="fa fa-fw fa-warning" />
+                                            </span>
+                                            <span>empty</span>
+                                        </span>
+                                    </t>
+                                    <t
+                                        t-elif="state.moneyStatusOdoo[moneyValue] == '0' and env.pos.config.enable_glory and !state.showStatusGlory"
+                                    >
+                                        <span
+                                            class="money-details-value-status money-details-value-status-danger"
+                                        >
+                                            <span>
+                                                <i class="fa fa-fw fa-warning" />
+                                            </span>
+                                            <span>empty</span>
+                                        </span>
+                                    </t>
+                                    <t
+                                        t-elif="state.moneyStatus[moneyValue] == '1' and env.pos.config.enable_glory and state.showStatusGlory"
+                                    >
+                                        <span
+                                            class="money-details-value-status money-details-value-status-warning"
+                                        >
+                                            <span>
+                                                <i class="fa fa-fw fa-warning" />
+                                            </span>
+                                            <span>low</span>
+                                        </span>
+                                    </t>
+                                    <t
+                                        t-elif="state.moneyStatusOdoo[moneyValue] == '1' and env.pos.config.enable_glory and !state.showStatusGlory"
+                                    >
+                                        <span
+                                            class="money-details-value-status money-details-value-status-warning"
+                                        >
+                                            <span>
+                                                <i class="fa fa-fw fa-warning" />
+                                            </span>
+                                            <span>low</span>
+                                        </span>
+                                    </t>
+                                    <t
+                                        t-elif="state.moneyStatus[moneyValue] == '3' and env.pos.config.enable_glory and state.showStatusGlory"
+                                    >
+                                        <span
+                                            class="money-details-value-status money-details-value-status-info"
+                                        >
+                                            <span>
+                                                <i class="fa fa-fw fa-warning" />
+                                            </span>
+                                            <span>high</span>
+                                        </span>
+                                    </t>
+                                    <t
+                                        t-elif="state.moneyStatus[moneyValue] == '4' and env.pos.config.enable_glory and state.showStatusGlory"
+                                    >
+                                        <span
+                                            class="money-details-value-status money-details-value-status-dark"
+                                        >
+                                            <span>
+                                                <i class="fa fa-fw fa-warning" />
+                                            </span>
+                                            <span>full</span>
+                                        </span>
+                                    </t>
+                                    <t t-else="">
+                                        <span class="money-details-value-status" />
+                                    </t>
+                                    <span
+                                        class="pos-input"
+                                        t-att-id="moneyValue"
+                                        t-esc="state.moneyDetails[moneyValue]"
+                                    />
+                                    <span
+                                        class="glory-money-inventory-stacker"
+                                        t-esc="state.moneyStackerDetails[moneyValue]"
+                                    />
+                                    <span
+                                        class="glory-money-inventory"
+                                        t-esc="state.moneyDetails[moneyValue] - state.moneyStackerDetails[moneyValue]"
+                                    />
+                                    <t t-if="(moneyValue * 1) >= 5">
+                                        <CurrencyAmount
+                                            forTarget="moneyValue"
+                                            currency="currency"
+                                            amount="moneyValue"
+                                        />
+                                    </t>
+                                    <t t-else="">
+                                        <CurrencyAmount
+                                            forTarget="moneyValue"
+                                            currency="currency"
+                                            amount="env.pos.format_currency_no_symbol(moneyValue * 1)"
+                                        />
+                                    </t>
+                                </div>
+                            </t>
+                        </div>
+                    </div>
+                    <div class="col-3 offset-1">
+                        <div
+                            t-if="env.pos.cashier.allow_see_inventory_total"
+                            class="total-section"
+                        >
+                            <div class="col-12">
+                                <span>Total Glory </span>
+                                <CurrencyAmount
+                                    currency="currency"
+                                    amount="env.pos.format_currency_no_symbol(state.total)"
+                                />
+                            </div>
+                            <div class="col-4" style="color: #f4ba00 !important;">
+                                <span>Total (Stacker Coins) </span>
+                                <CurrencyAmount
+                                    currency="currency"
+                                    amount="env.pos.format_currency_no_symbol(state.totalStackerCoins)"
+                                />
+                            </div>
+                            <div class="col-4" style="color: #f4ba00 !important;">
+                                <span>Total (Stacker Bills) </span>
+                                <CurrencyAmount
+                                    currency="currency"
+                                    amount="env.pos.format_currency_no_symbol(state.totalStackerBills)"
+                                />
+                            </div>
+                            <div class="col-4" style="color: #0077f3 !important;">
+                                <span>Total (Cassette Coins) </span>
+                                <CurrencyAmount
+                                    currency="currency"
+                                    amount="env.pos.format_currency_no_symbol(state.totalCassetteCoins)"
+                                />
+                            </div>
+                            <div class="col-4" style="color: #0077f3 !important;">
+                                <span>Total (Cassette Bills) </span>
+                                <CurrencyAmount
+                                    currency="currency"
+                                    amount="env.pos.format_currency_no_symbol(state.totalCassetteBills)"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </main>
+                <div class="footer">
+                    <div
+                        class="button button-show-glory-status"
+                        t-on-click="onClickShowStatusGlory"
+                        t-if="!state.showStatusGlory"
+                    >
+                        Show Glory Status
+                    </div>
+                    <div
+                        class="button button-show-glory-status"
+                        t-on-click="onClickHideStatusGlory"
+                        t-if="state.showStatusGlory"
+                    >
+                        Hide Glory Status
+                    </div>
+                    <div class="button cancel" t-on-click="cancel">
+                        <t t-esc="props.cancelText" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+
+</templates>

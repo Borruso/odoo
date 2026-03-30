@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates id="template" xml:space="preserve">
+
+    <t
+        t-name="GloryClosePosPopup"
+        t-inherit="point_of_sale.ClosePosPopup"
+        t-inherit-mode="extension"
+        owl="1"
+    >
+        <xpath expr="//header/div[hasclass('total-orders')]" position="attributes">
+            <attribute name="t-if">allowSeeCloseTotalSection</attribute>
+        </xpath>
+        <xpath
+            expr="//div[hasclass('payment-methods-overview')]//t[@t-if='cashControl']//input[hasclass('pos-input')]"
+            position="attributes"
+        >
+            <attribute name="t-if">allowSeeCloseTotalSection</attribute>
+        </xpath>
+        <xpath
+            expr="//div[hasclass('payment-methods-overview')]//t[@t-if='cashControl']//i[hasclass('fa-calculator')]/.."
+            position="attributes"
+        >
+            <attribute name="t-if">allowSeeCloseTotalSection</attribute>
+        </xpath>
+        <xpath
+            expr="//div[hasclass('payment-methods-overview')]//tr[@t-foreach='otherPaymentMethods']//input[hasclass('pos-input')]"
+            position="attributes"
+        >
+            <attribute name="t-if">allowSeeCloseTotalSection</attribute>
+        </xpath>
+        <xpath
+            expr="//div[hasclass('payment-methods-overview')]//thead/tr/th[2]"
+            position="attributes"
+        >
+            <attribute name="t-if">allowSeeCloseTotalSection</attribute>
+        </xpath>
+        <xpath
+            expr="//div[hasclass('payment-methods-overview')]//t[@t-if='cashControl']//td[@t-esc='env.pos.format_currency(defaultCashDetails.amount)']"
+            position="attributes"
+        >
+            <attribute name="t-if">allowSeeCloseTotalSection</attribute>
+        </xpath>
+        <xpath
+            expr="//div[hasclass('payment-methods-overview')]//t[@t-if='cashControl']//tbody[hasclass('cash-overview')]"
+            position="attributes"
+        >
+            <attribute name="t-if">allowSeeCloseTotalSection</attribute>
+        </xpath>
+        <xpath
+            expr="//div[hasclass('payment-methods-overview')]//td[@t-esc='env.pos.format_currency(pm.amount)']"
+            position="attributes"
+        >
+            <attribute name="t-if">allowSeeCloseTotalSection</attribute>
+        </xpath>
+        <xpath expr="//div[hasclass('notes-container')]" position="attributes">
+            <attribute name="t-if">allowSeeCloseTotalSection</attribute>
+        </xpath>
+    </t>
+
+</templates>

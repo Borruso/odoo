@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="GloryOperationLockBillPopup" owl="1">
+        <div class="modal-dialog">
+            <div class="popup popup-text glory-popup-text">
+                <h1>Lock Bill Operation</h1>
+                <p class="category">
+                    Please complete the "Lock Bill" action before proceeding with any other operations.
+                </p>
+                <div class="glory-popup-container">
+                    <div
+                        class="button glory-popup-button glory-popup-button-warning dynamic-size"
+                        t-on-click="openGloryOperationLockBillRequest"
+                        t-if="env.pos.config.enable_glory and env.pos.cashier.allow_administrator_operation"
+                    >
+                        <i class="fa fa-lock" /> Lock Bill
+                    </div>
+                </div>
+                <div class="footer">
+                    <div
+                        class="button glory-popup-button glory-popup-button-danger cancel"
+                        t-on-click="cancel"
+                    >
+                        <i class="fa fa-close" /> Cancel
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+
+</templates>
