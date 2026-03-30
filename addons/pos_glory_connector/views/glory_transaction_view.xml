@@ -26,7 +26,9 @@
                             <field name="payment_method_id" />
                             <field name="employee_id" />
                             <field name="machine_state" />
+                            <field name="state" />
                             <field name="operation" />
+                            <field name="pos_payment_uuid" />
                             <field name="is_completed" invisible="1"/>
                             <separator string="Balance" />
                             <field
@@ -710,7 +712,7 @@
                                 <div class="o_row">
                                     <field name="stacker_bill_50_00" />
                                     <field
-                                        name="stacker_bill_50_00"
+                                        name="diff_stacker_bill_50_00"
                                         class="text-danger"
                                         attrs="{'invisible': ['|',('diff_stacker_bill_50_00', '&gt;=', 0),('is_completed', '=', True)]}"
                                     />
@@ -1369,7 +1371,9 @@
                 <field name="payment_method_id" />
                 <field name="employee_id" />
                 <field name="machine_state" />
+                <field name="state" />
                 <field name="operation" />
+                <field name="pos_payment_uuid" />
                 <field name="payment_amount" />
                 <field name="amount" sum="Amount" />
                 <field name="rest_amount" invisible="1"/>
@@ -1406,6 +1410,13 @@
                 <field name="company_id" />
                 <field name="payment_method_id" />
                 <field name="employee_id" />
+                <field name="state" />
+                <field name="pos_payment_uuid" />
+                <separator />
+                <filter string="Draft" name="state_draft" domain="[('state', '=', 'draft')]" />
+                <filter string="Pending" name="state_pending" domain="[('state', '=', 'pending')]" />
+                <filter string="Done" name="state_done" domain="[('state', '=', 'done')]" />
+                <filter string="Error" name="state_error" domain="[('state', '=', 'error')]" />
                 <separator />
                 <filter
                     string="Cashin Cancel Request"
