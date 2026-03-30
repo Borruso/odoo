@@ -1,8 +1,29 @@
 odoo.define("pos_glory_connector.GloryModels", function (require) {
     "use strict";
 
-    const {Order: OriginalOrder, Payment} = require("point_of_sale.models");
+    const {
+        Order: OriginalOrder,
+        Payment: OriginalPayment,
+    } = require("point_of_sale.models");
     const Registries = require("point_of_sale.Registries");
+    const generateLocalUuid = () =>
+        `glory-${Date.now()}-${Math.random().toString(16).slice(2)}`;
+
+    const GloryPaymentExtension = (PaymentClass) =>
+        class GloryPayment extends PaymentClass {
+            init_from_JSON(json) {
+                super.init_from_JSON(...arguments);
+                this.glory_payment_uuid =
+                    json.glory_payment_uuid || this.glory_payment_uuid || false;
+            }
+
+            export_as_JSON() {
+                const json = super.export_as_JSON(...arguments);
+                json.glory_payment_uuid =
+                    this.glory_payment_uuid || this.uuid || this.cid || false;
+                return json;
+            }
+        };
 
     const GloryOrderExtension = (OrderClass) =>
         class GloryOrder extends OrderClass {
@@ -12,7 +33,7 @@ odoo.define("pos_glory_connector.GloryModels", function (require) {
                 if (this.electronic_payment_in_progress()) {
                     return false;
                 }
-                var newPaymentline = Payment.create(
+                var newPaymentline = OriginalPayment.create(
                     {},
                     {order: this, payment_method: payment_method, pos: this.pos}
                 );
@@ -24,6 +45,8 @@ odoo.define("pos_glory_connector.GloryModels", function (require) {
                 newPaymentline.set_amount(this.get_due());
 
                 if (payment_method.is_glory_machine) {
+                    newPaymentline.glory_payment_uuid =
+                        newPaymentline.uuid || generateLocalUuid();
                     newPaymentline.set_payment_status("pending");
                 }
 
@@ -35,4 +58,5 @@ odoo.define("pos_glory_connector.GloryModels", function (require) {
         };
 
     Registries.Model.extend(OriginalOrder, GloryOrderExtension);
+    Registries.Model.extend(OriginalPayment, GloryPaymentExtension);
 });
