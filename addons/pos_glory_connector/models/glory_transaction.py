@@ -11,6 +11,13 @@ class GloryTransaction(models.Model):
     _name = "glory.transaction"
     _description = "Glory Transaction"
     _order = "datetime desc"
+    _sql_constraints = [
+        (
+            "glory_transaction_pos_payment_uuid_uniq",
+            "unique(pos_payment_uuid)",
+            "POS payment UUID must be unique.",
+        ),
+    ]
 
     name = fields.Char(compute="_compute_name")
     session_id = fields.Many2one("pos.session", string="Session", index=True)
@@ -31,6 +38,21 @@ class GloryTransaction(models.Model):
     )
     employee_id = fields.Many2one("hr.employee", string="Employee", copy=False)
     machine_state = fields.Char(copy=False)
+    state = fields.Selection(
+        [
+            ("draft", "Draft"),
+            ("pending", "Pending"),
+            ("done", "Done"),
+            ("error", "Error"),
+        ],
+        default="draft",
+        copy=False,
+        index=True,
+    )
+    pos_payment_uuid = fields.Char(copy=False, index=True)
+    attempt_count = fields.Integer(default=0, copy=False)
+    last_error = fields.Text(copy=False)
+    processed_at = fields.Datetime(copy=False)
     operation = fields.Selection(
         [
             ("cashin_cancel_request", "Cashin Cancel Request"),

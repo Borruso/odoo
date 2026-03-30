@@ -407,6 +407,7 @@ odoo.define("pos_glory_connector.GloryPaymentScreen", function (require) {
                             false,
                             false,
                             "",
+                            line.glory_payment_uuid || line.uuid || false,
                         ],
                     });
                     return;
@@ -430,6 +431,7 @@ odoo.define("pos_glory_connector.GloryPaymentScreen", function (require) {
                             this.state.moneyDetails,
                             this.state.moneyDetails,
                             "payment",
+                            line.glory_payment_uuid || line.uuid || false,
                         ],
                     });
                 } else {
@@ -453,6 +455,7 @@ odoo.define("pos_glory_connector.GloryPaymentScreen", function (require) {
                             false,
                             false,
                             "",
+                            line.glory_payment_uuid || line.uuid || false,
                         ],
                     });
                 }
@@ -486,6 +489,7 @@ odoo.define("pos_glory_connector.GloryPaymentScreen", function (require) {
                             false,
                             false,
                             "",
+                            line.glory_payment_uuid || line.uuid || false,
                         ],
                     });
                     return;
@@ -513,6 +517,7 @@ odoo.define("pos_glory_connector.GloryPaymentScreen", function (require) {
                                 false,
                                 false,
                                 "",
+                                line.glory_payment_uuid || line.uuid || false,
                             ],
                         });
                         break;
@@ -538,6 +543,7 @@ odoo.define("pos_glory_connector.GloryPaymentScreen", function (require) {
                                 false,
                                 false,
                                 "",
+                                line.glory_payment_uuid || line.uuid || false,
                             ],
                         });
                         break;
@@ -560,6 +566,7 @@ odoo.define("pos_glory_connector.GloryPaymentScreen", function (require) {
                                 this.state.moneyDetails,
                                 this.state.moneyDetails,
                                 "payment",
+                                line.glory_payment_uuid || line.uuid || false,
                             ],
                         });
                         break;
@@ -586,6 +593,7 @@ odoo.define("pos_glory_connector.GloryPaymentScreen", function (require) {
                                 false,
                                 false,
                                 "",
+                                line.glory_payment_uuid || line.uuid || false,
                             ],
                         });
                         break;
@@ -615,7 +623,6 @@ odoo.define("pos_glory_connector.GloryPaymentScreen", function (require) {
                 }
 
                 line.set_payment_status("waiting");
-                line.set_payment_status("waitingCancel");
 
                 let sr = "";
                 if (lineAmount < 0) {
@@ -673,6 +680,7 @@ odoo.define("pos_glory_connector.GloryPaymentScreen", function (require) {
                                 false,
                                 false,
                                 "",
+                                line.glory_payment_uuid || line.uuid || false,
                             ],
                         });
                         return;
@@ -765,6 +773,7 @@ odoo.define("pos_glory_connector.GloryPaymentScreen", function (require) {
                                         false,
                                         false,
                                         "",
+                                        line.glory_payment_uuid || line.uuid || false,
                                     ],
                                 });
                             }
@@ -789,6 +798,7 @@ odoo.define("pos_glory_connector.GloryPaymentScreen", function (require) {
                                     false,
                                     false,
                                     "",
+                                    line.glory_payment_uuid || line.uuid || false,
                                 ],
                             });
                         }

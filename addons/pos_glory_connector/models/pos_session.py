@@ -106,7 +106,7 @@ class PosSessionInherit(models.Model):
         return result
 
     def generate_glory_transaction(
-        self, payment_method, id_cashier, message, operation, amount
+        self, payment_method, id_cashier, message, operation, amount, pos_payment_uuid
     ):
         self.ensure_one()
 
@@ -117,7 +117,15 @@ class PosSessionInherit(models.Model):
             "machine_state": message,
             "operation": operation,
             "amount": float(amount) if amount else 0.00,
+            "pos_payment_uuid": pos_payment_uuid or False,
+            "attempt_count": 1,
+            "processed_at": fields.Datetime.now(),
         }
+        if operation in ["payment_request", "refund_payment_request"]:
+            transaction_vals["state"] = "done"
+        elif operation == "aborted_payment_request":
+            transaction_vals["state"] = "error"
+            transaction_vals["last_error"] = message
 
         if self.glory_transaction_ids:
             previous_glory_transaction = fields.first(self.glory_transaction_ids).sudo()
@@ -213,11 +221,17 @@ class PosSessionInherit(models.Model):
         money_details,
         stacker_money_details,
         payment_mode,
+        pos_payment_uuid=False,
     ):
         for session in self:
             session_sudo = session.sudo()
             glory_transaction = session_sudo.generate_glory_transaction(
-                payment_method, id_cashier, message, operation, amount
+                payment_method,
+                id_cashier,
+                message,
+                operation,
+                amount,
+                pos_payment_uuid,
             )
             if money_details or stacker_money_details:
                 glory_transaction = session_sudo.update_money_details(
